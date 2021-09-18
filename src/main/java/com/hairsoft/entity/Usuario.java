@@ -1,12 +1,14 @@
 package com.hairsoft.entity;
 
+import java.util.ArrayList;
+
 public class Usuario {
 
 	public Integer ID;
 	public String usuario;
 	public String email;
 	public String senha;
-	
+
 	public Usuario ()
 	{
 		
@@ -17,6 +19,33 @@ public class Usuario {
 		this.usuario = usuario;
 		this.email = email;
 		this.senha = senha;
+	}
+
+	public static int gerarId(ArrayList<Usuario> usuarios){
+		int Id = 0;
+		if (usuarios.isEmpty()) {
+			return Id;
+		} else {
+			for(Usuario usuario: usuarios) {
+				if (usuario.ID == Id) {
+					++Id;
+				}
+			}
+			return Id;
+		}
+	}
+
+	public static boolean equalEmail(ArrayList<Usuario> usuarios, String email){
+		if (usuarios.isEmpty()) {
+			return false;
+		} else {
+			for(Usuario usuario: usuarios) {
+				if (usuario.email.equals(email)) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 
 	public void setUsuario(String usuario) {

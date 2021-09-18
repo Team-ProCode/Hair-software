@@ -1,6 +1,8 @@
 package com.hairsoft.hairsoft;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.hairsoft.entity.Usuario;
 import javafx.event.ActionEvent;
@@ -16,44 +18,25 @@ public class LoginController {
 	public ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
     @FXML
-    private AnchorPane paneLog, paneReg;
+    public AnchorPane paneLog, paneReg;
 
     @FXML
-    private TextField txfRegUsuario, txfRegEmail, txfEmail;
+    public TextField txfRegUsuario, txfRegEmail, txfEmail;
 
     @FXML
-    private PasswordField txfSenha, txfRegSenha;
+    public PasswordField txfSenha, txfRegSenha;
 
     @FXML
-    private Button btnCancel, btnConfirm, btnRegister, btnLogin;
+    public Button btnCancel, btnConfirm, btnRegister, btnLogin;
     
     @FXML
-    void btnCancel_click(ActionEvent event) {
+    public void btnCancel_click(ActionEvent event) {
     	register_off();
     }
 
     @FXML
-    void btnConfirm_click(ActionEvent event) {
-    	try {
-    		inserir();
-    	}catch(Exception e) {
-			e.printStackTrace();
-		}
-    }
-
-    public int gerarId(){
-        int Id = 0;
-
-        if (this.usuarios.isEmpty()) {
-            return Id;
-        } else {
-            for(Usuario usuario: usuarios) {
-                if (usuario.ID == Id) {
-                    ++Id;
-                }
-            }
-            return Id;
-        }
+    public void btnConfirm_click(ActionEvent event) {
+        inserir();
     }
 
     public void inserir(){
@@ -64,9 +47,50 @@ public class LoginController {
             email = txfRegEmail.getText();
             senha = txfRegSenha.getText();
 
-            usuarios.add(new Usuario(gerarId(),nome, email, senha ));
-
+            if(Usuario.equalEmail(usuarios , email)){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ops");
+                alert.setHeaderText("Email ja cadastrado em usuarios!!");
+                alert.showAndWait();
+            }else{
+                usuarios.add(new Usuario(Usuario.gerarId(usuarios),nome, email, senha ));
+                register_off();
+            }
         }catch(Exception e){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ops");
+            alert.setHeaderText("A operação não pode ser realizada.");
+            alert.setContentText("Verifique se digitou corretamente!!");
+            alert.showAndWait();
+        }
+    }
+
+    public void logar(){
+        Alert alert;
+        try {
+            String email, senha;
+            email = txfEmail.getText();
+            senha = txfSenha.getText();
+
+            for(Usuario usuario: usuarios) {
+                if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("gozado");
+                    alert.setHeaderText("AEEEEEe");
+                    alert.setContentText("Deu certo gay!!");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
+            throw new IOException();
+        } catch (IOException var4) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ops");
+            alert.setHeaderText("A operação não pode ser realizada.");
+            alert.setContentText("Digite um numero para pesquisar!!");
+            alert.showAndWait();
+        } catch (Exception var5) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ops");
             alert.setHeaderText("A operação não pode ser realizada.");
@@ -77,7 +101,7 @@ public class LoginController {
 
     @FXML
     void btnLogin_click(ActionEvent event) {
-
+        logar();
     }
 
     @FXML
@@ -89,6 +113,9 @@ public class LoginController {
         paneLog.setVisible(false);
         paneReg.setVisible(true);
 
+        txfEmail.clear();
+        txfSenha.clear();
+
         btnLogin.setVisible(false);
         btnRegister.setVisible(false);
     }
@@ -96,6 +123,10 @@ public class LoginController {
     public void register_off(){
         paneLog.setVisible(true);
         paneReg.setVisible(false);
+
+        txfRegUsuario.clear();
+        txfRegEmail.clear();
+        txfRegSenha.clear();
 
         btnLogin.setVisible(true);
         btnRegister.setVisible(true);
