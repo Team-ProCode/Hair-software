@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Validation {
 
     public static boolean isValidEmail(String email) {
+
         boolean isEmailIdValid = false;
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
