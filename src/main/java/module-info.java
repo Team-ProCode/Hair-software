@@ -6,7 +6,10 @@ module com.hairsoft.hairsoft {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires javafx.graphics;
+    requires charm.glisten;
 
     opens com.hairsoft.hairsoft to javafx.fxml;
     exports com.hairsoft.hairsoft;
+    exports com.hairsoft.controller;
+    opens com.hairsoft.controller to javafx.fxml;
 }

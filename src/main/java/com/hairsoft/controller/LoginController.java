@@ -1,21 +1,33 @@
-package com.hairsoft.hairsoft;
+package com.hairsoft.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 
 import com.hairsoft.entity.Usuario;
+import com.hairsoft.hairsoft.LoginApp;
+import com.hairsoft.hairsoft.MainScreenApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
-	public ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    public ArrayList<Usuario> usuarios = new ArrayList<>();
+
+    public void initialize(URL url, ResourceBundle rb){
+
+    }
+
+	//public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
     @FXML
     public AnchorPane paneLog, paneReg;
@@ -74,11 +86,12 @@ public class LoginController {
 
             for(Usuario usuario: usuarios) {
                 if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("gozado");
-                    alert.setHeaderText("AEEEEEe");
-                    alert.setContentText("Deu certo gay!!");
-                    alert.showAndWait();
+
+
+                    callScreen(usuario.email, usuario.usuario);
+                    LoginApp.getStage().close();
+
+
                     return;
                 }
             }
@@ -95,6 +108,21 @@ public class LoginController {
             alert.setTitle("Ops");
             alert.setHeaderText("A operação não pode ser realizada.");
             alert.setContentText("Verifique se digitou corretamente!!");
+            alert.showAndWait();
+        }
+    }
+
+    public void callScreen(String Email, String Nome){
+        Alert alert;
+        MainScreenApp screenApp = new MainScreenApp();
+        try{
+            MainScreenApp.usuariosCallBack(usuarios, Email, Nome);
+            screenApp.start(new Stage());
+        }catch (Exception e){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Erro na execução da instancia.");
+            alert.setContentText("Contacte o supporte para lhe auxiliar!!");
             alert.showAndWait();
         }
     }

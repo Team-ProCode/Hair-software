@@ -34,56 +34,39 @@
 
 <?import com.gluonhq.charm.glisten.control.Avatar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-  <MenuBar VBox.vgrow="NEVER">
-    <menus>
-      <Menu fx:id="mbAntendimento" mnemonicParsing="false" text="Atendimentos">
-        <items>
-          <MenuItem mnemonicParsing="false" text="New"/>
-          <MenuItem mnemonicParsing="false" text="Open…"/>
-          <Menu mnemonicParsing="false" text="Open Recent"/>
-          <SeparatorMenuItem mnemonicParsing="false"/>
-          <MenuItem mnemonicParsing="false" text="Close"/>
-          <MenuItem mnemonicParsing="false" text="Save"/>
-          <MenuItem mnemonicParsing="false" text="Save As…"/>
-          <MenuItem mnemonicParsing="false" text="Revert"/>
-          <SeparatorMenuItem mnemonicParsing="false"/>
-          <MenuItem mnemonicParsing="false" text="Preferences…"/>
-          <SeparatorMenuItem mnemonicParsing="false"/>
-          <MenuItem mnemonicParsing="false" text="Quit"/>
-        </items>
-      </Menu>
-      <Menu fx:id="mbConfig" mnemonicParsing="false" text="Configurações">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Undo"/>
-          <MenuItem mnemonicParsing="false" text="Redo"/>
-          <SeparatorMenuItem mnemonicParsing="false"/>
-          <MenuItem mnemonicParsing="false" text="Cut"/>
-          <MenuItem mnemonicParsing="false" text="Copy"/>
-          <MenuItem mnemonicParsing="false" text="Paste"/>
-          <MenuItem mnemonicParsing="false" text="Delete"/>
-          <SeparatorMenuItem mnemonicParsing="false"/>
-          <MenuItem mnemonicParsing="false" text="Select All"/>
-          <MenuItem mnemonicParsing="false" text="Unselect All"/>
-        </items>
-      </Menu>
-      <Menu fx:id="mbHelp" mnemonicParsing="false" text="Ajuda">
-        <items>
-          <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
-        </items>
-      </Menu>
-    </menus>
-  </MenuBar>
-  <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-    <Avatar fx:id="avatar" layoutX="14.0" layoutY="14.0"/>
-    <Label layoutX="66.0" layoutY="24.0" text="Bem Vindo(a)"/>
-    <Label fx:id="lblWellcomeName" layoutX="154.0" layoutY="24.0" text="Name"/>
-  </AnchorPane>
-</VBox>
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Untitled Tab 1">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblWellcomeName" layoutX="109.0" layoutY="29.0" text="Bem Vindo(a)">
+                           <font>
+                              <Font name="Bodoni MT" size="22.0" />
+                           </font>
+                        </Label>
+                        <Avatar fx:id="avatar" layoutX="31.0" layoutY="29.0">
+                           <image>
+                              <Image url="@image/Multimedia_(253).jpg" />
+                           </image></Avatar>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Untitled Tab 2">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
