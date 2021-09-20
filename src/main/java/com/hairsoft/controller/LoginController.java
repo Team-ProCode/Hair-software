@@ -3,12 +3,13 @@ package com.hairsoft.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
+import com.hairsoft.method.Validation;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.hairsoft.LoginApp;
 import com.hairsoft.hairsoft.MainScreenApp;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,9 +60,19 @@ public class LoginController implements Initializable {
             email = txfRegEmail.getText();
             senha = txfRegSenha.getText();
 
-            if(Usuario.equalEmail(usuarios , email)){
+            if(nome.isEmpty()){
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Ops");
+                alert.setTitle("Registro incorreto!");
+                alert.setHeaderText("Digite algo no campo usuarios!!");
+                alert.showAndWait();
+            }else if(!Validation.isValidSenha(senha)){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registro incorreto!");
+                alert.setHeaderText("Senha precisa ter no minimo 8 caracteres!!");
+                alert.showAndWait();
+            }else if(!Validation.isValidEmail(email) | Usuario.equalEmail(usuarios , email)){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registro incorreto");
                 alert.setHeaderText("Email ja cadastrado em usuarios!!");
                 alert.showAndWait();
             }else{
