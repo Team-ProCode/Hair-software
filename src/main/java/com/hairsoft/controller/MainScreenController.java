@@ -4,10 +4,16 @@ import com.hairsoft.entity.Usuario;
 import com.hairsoft.hairsoft.MainScreenApp;
 
 import com.gluonhq.charm.glisten.control.Avatar;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,19 +32,36 @@ public class MainScreenController implements Initializable {
         lblWellcomeName.setText("Bem vindo(a) " + Nome);
     }
 
-    @FXML
-    private Menu mbAntendimento;
+    @FXML private AnchorPane paneContainerSalao;
+    @FXML private Tab tabHome, tabFeatures;
+    @FXML private Avatar avatar;
+    @FXML private Label lblWellcomeName;
+    @FXML private ComboBox<String> cmbSalaoHome;
+    @FXML private Button btnAdicionarSalao, btnEditarSalao;
+    @FXML private Pane paneSalão;
+    @FXML private TextField txfIdSalao, txfNomeSalao, txfCnpjSalao;
+    @FXML private Button btnDeletarSalao, btnSalvarSalao;
+    @FXML private Label lblUsuario;
+    @FXML private Avatar avatar1;
+    @FXML private ComboBox<String> cmbSalaoBar;
+
+    @FXML void btnAdicionarSalao_click(ActionEvent event) {
+        paneContainerSalao.setVisible(true);
+    }
 
     @FXML
-    private Menu mbConfig;
+    void btnDeletarSalao_click(ActionEvent event) {
+
+    }
 
     @FXML
-    private Menu mbHelp;
+    void btnEditarSalao_click(ActionEvent event) {
+
+    }
 
     @FXML
-    private Avatar avatar;
+    void btnSalvarSalao_click(ActionEvent event) {
 
-    @FXML
-    private Label lblWellcomeName;
+    }
 
 }

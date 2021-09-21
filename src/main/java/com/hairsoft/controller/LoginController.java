@@ -17,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -63,17 +65,22 @@ public class LoginController implements Initializable {
             if(nome.isEmpty()){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Digite algo no campo usuarios!!");
+                alert.setHeaderText("Por favor insira um usuario valido!!");
+                alert.showAndWait();
+            }else if(Usuario.equalEmail(usuarios , email)){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registro incorreto!");
+                alert.setHeaderText("Ja existe um usuario usando este Email!!");
+                alert.showAndWait();
+            }else if(!Validation.isValidEmail(email)){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registro incorreto!");
+                alert.setHeaderText("Por favor insira um email valido!!");
                 alert.showAndWait();
             }else if(!Validation.isValidSenha(senha)){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Senha precisa ter no minimo 8 caracteres!!");
-                alert.showAndWait();
-            }else if(!Validation.isValidEmail(email) | Usuario.equalEmail(usuarios , email)){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Registro incorreto");
-                alert.setHeaderText("Email ja cadastrado em usuarios!!");
+                alert.setHeaderText("Senha precisa ter no maximo 8 caracteres!!");
                 alert.showAndWait();
             }else{
                 usuarios.add(new Usuario(Usuario.gerarId(usuarios),nome, email, senha ));
@@ -97,13 +104,8 @@ public class LoginController implements Initializable {
 
             for(Usuario usuario: usuarios) {
                 if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
-
-
                     callScreen(usuario.email, usuario.usuario);
                     LoginApp.getStage().close();
-
-
-                    return;
                 }
             }
 
@@ -127,7 +129,7 @@ public class LoginController implements Initializable {
         Alert alert;
         MainScreenApp screenApp = new MainScreenApp();
         try{
-            MainScreenApp.usuariosCallBack(usuarios, Email, Nome);
+            MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
             screenApp.start(new Stage());
         }catch (Exception e){
             alert = new Alert(Alert.AlertType.ERROR);
@@ -137,6 +139,7 @@ public class LoginController implements Initializable {
             alert.showAndWait();
         }
     }
+
 
     @FXML
     void btnLogin_click(ActionEvent event) {
