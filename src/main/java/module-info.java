@@ -11,5 +11,7 @@ module com.hairsoft.hairsoft {
     opens com.hairsoft.hairsoft to javafx.fxml;
     exports com.hairsoft.hairsoft;
     exports com.hairsoft.controller;
+    exports com.hairsoft.entity;
+    exports com.hairsoft.dialog;
     opens com.hairsoft.controller to javafx.fxml;
 }

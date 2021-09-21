@@ -9,7 +9,6 @@ public class Usuario {
 	public String usuario;
 	public String email;
 	public String senha;
-	public ArrayList<Salao> salaos;
 
 	public Usuario ()
 	{
@@ -50,6 +49,14 @@ public class Usuario {
 		}
 	}
 
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer ID) {
+		this.ID = ID;
+	}
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
@@ -74,11 +81,4 @@ public class Usuario {
 		return senha;
 	}
 
-	public void setSalaos(ArrayList<Salao> salaos) {
-		this.salaos = salaos;
-	}
-
-	public List<Salao> getSalaos() {
-		return salaos;
-	}
 }
