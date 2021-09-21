@@ -9,7 +9,7 @@ public class Usuario {
 	public String usuario;
 	public String email;
 	public String senha;
-	public List<Salao> salaos;
+	public ArrayList<Salao> salaos;
 
 	public Usuario ()
 	{
@@ -74,7 +74,7 @@ public class Usuario {
 		return senha;
 	}
 
-	public void setSalaos(List<Salao> salaos) {
+	public void setSalaos(ArrayList<Salao> salaos) {
 		this.salaos = salaos;
 	}
 

@@ -27,7 +27,7 @@ public class LoginController implements Initializable {
     public ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public void initialize(URL url, ResourceBundle rb){
-
+        usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
     }
 
 	//public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -106,6 +106,7 @@ public class LoginController implements Initializable {
                 if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
                     callScreen(usuario.email, usuario.usuario);
                     LoginApp.getStage().close();
+                    return;
                 }
             }
 

@@ -14,5 +14,17 @@ public class Salao {
 
     }
 
+    public Salao(int Id, String Nome, String Cnpj){
+        this.Id = Id;
+        this.Nome = Nome;
+        this.Cnpj = Cnpj;
+    }
 
+    @Override
+    public String toString() {
+        return "Salao{" +
+                "Id=" + Id +
+                ", Nome='" + Nome + '\'' +
+                '}';
+    }
 }

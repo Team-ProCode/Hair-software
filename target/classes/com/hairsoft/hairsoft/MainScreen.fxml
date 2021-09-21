@@ -47,7 +47,7 @@
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hairsoft.controller.MainScreenController">
    <children>
-      <TabPane layoutY="30.0" prefHeight="570.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="38.0" prefHeight="562.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="tabHome" text="Home">
                <content>
@@ -101,7 +101,7 @@
             </Tab>
          </tabs>
       </TabPane>
-      <Pane prefHeight="37.0" prefWidth="400.0">
+      <Pane prefHeight="42.0" prefWidth="400.0">
          <children>
             <Label fx:id="lblUsuario" layoutX="318.0" layoutY="10.0" text="Usuario" />
             <Avatar fx:id="avatar1" layoutX="364.0" layoutY="1.0">
@@ -109,7 +109,7 @@
                   <Image url="@image/Avatar-Mask.png" />
                </image>
             </Avatar>
-            <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="1.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
+            <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
          </children>
       </Pane>
    </children>
