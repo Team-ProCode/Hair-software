@@ -37,7 +37,7 @@ public class MainScreenController implements Initializable {
 
     public String Nome, Email;
 
-    ErroDialog dialog;
+    ErroDialog dialog = new ErroDialog();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,7 +46,6 @@ public class MainScreenController implements Initializable {
 
     public void listInMemory(){
         usuarios = MainScreenApp.usuarios;
-
         Nome = MainScreenApp.Nome;
         Email = MainScreenApp.Email;
 
@@ -66,19 +65,20 @@ public class MainScreenController implements Initializable {
     public void addSalao() {
         try {
             int Id;
-            String nomeSalao, CNPJ;
+            String nomeSalao = txfNomeSalao.getText();
 
             Id = Integer.parseInt(txfIdSalao.getText());
-            nomeSalao = txfNomeSalao.getText();
-            CNPJ = txfCnpjSalao.getText();
+            String CNPJ = txfCnpjSalao.getText();
 
 
             if (nomeSalao.isEmpty()){
-                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
+                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMensageErroIsEmpty());
+                System.out.println(nomeSalao);
             }else if (CNPJ.isEmpty()){
-                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
-//          }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
-//                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
+                alertDialog(dialog.getMessegeErroCNPJ(),dialog.getMessegeErroCNPJ());
+                System.out.println(CNPJ);
+            }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
+                alertDialog(dialog.getTitleErroCNPJ(),dialog.getMessegeErroCNPJ());
             }
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
@@ -87,9 +87,17 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            alertDialog(dialog.getTitleErroSys(),dialog.getMensagemErroSys());
+            alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
     }
+
+//    public void editSalao(String nomeSalao, String CNPJ){
+//        try{
+//
+//        }catch (Exception e){
+//
+//        }
+//    }
 
     @FXML void btnAdicionarSalao_click(ActionEvent event) {
         paneContainerSalao.setVisible(true);
@@ -103,20 +111,22 @@ public class MainScreenController implements Initializable {
 
     @FXML
     void btnEditarSalao_click(ActionEvent event) {
-
+        paneContainerSalao.setVisible(true);
     }
 
     @FXML
     void btnSalvarSalao_click(ActionEvent event) {
         addSalao();
         paneContainerSalao.setVisible(false);
+        txfCnpjSalao.clear();
+        txfNomeSalao.clear();
     }
 
     public void alertDialog(String Title, String Messege){
         Alert alert;
         alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(dialog.getTitiloErroIsEmpty());
-        alert.setHeaderText(dialog.getMensagemErroIsEmpty());
+        alert.setTitle(Title);
+        alert.setHeaderText(Messege);
         alert.showAndWait();
     }
 
