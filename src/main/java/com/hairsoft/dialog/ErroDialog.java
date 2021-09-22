@@ -9,7 +9,7 @@ public class ErroDialog {
         return "Registro incompleto";
     }
 
-    public String getMenssageErroIsEmpty() {
+    public String getMensageErroIsEmpty() {
         return "Verifique se os campos de inserção estão corretos";
     }
 
@@ -17,16 +17,16 @@ public class ErroDialog {
         return "Erro no sistema";
     }
 
-    public String getMenssageErroSys() {
+    public String getMensageErroSys() {
         return "Não foi possivel completar a ação!";
     }
 
     public String getTitleErroCNPJ(){
-        return "Erro na validação!";
+        return "Erro de validação!";
     }
 
     public String getMessegeErroCNPJ(){
-        return "Insira um CNPJ váldo!";
+        return "Insira um CNPJ valido!";
     }
 
 }

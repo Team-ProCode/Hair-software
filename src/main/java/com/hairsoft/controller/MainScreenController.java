@@ -5,6 +5,7 @@ import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.entity.UsuarioSalao;
 import com.hairsoft.hairsoft.MainScreenApp;
+import com.hairsoft.method.MainScreenMethod;
 
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.hairsoft.method.ValidaCNPJ;
@@ -36,7 +37,7 @@ public class MainScreenController implements Initializable {
 
     public String Nome, Email;
 
-    ErroDialog dialog = new ErroDialog();
+    ErroDialog dialog;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,7 +74,7 @@ public class MainScreenController implements Initializable {
 
 
             if (nomeSalao.isEmpty()){
-                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMenssageErroIsEmpty());
+                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
             }else if (CNPJ.isEmpty()){
                 alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMenssageErroIsEmpty());
             }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
@@ -86,7 +87,7 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            alertDialog(dialog.getTitleErroSys(),dialog.getMenssageErroSys());
+            alertDialog(dialog.getTitleErroSys(),dialog.getMensagemErroSys());
         }
     }
 
@@ -109,15 +110,13 @@ public class MainScreenController implements Initializable {
     void btnSalvarSalao_click(ActionEvent event) {
         addSalao();
         paneContainerSalao.setVisible(false);
-        txfCnpjSalao.clear();
-        txfNomeSalao.clear();
     }
 
-    public void alertDialog(String Title, String Message){
+    public void alertDialog(String Title, String Messege){
         Alert alert;
         alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(Title);
-        alert.setHeaderText(Message);
+        alert.setTitle(dialog.getTitiloErroIsEmpty());
+        alert.setHeaderText(dialog.getMensagemErroIsEmpty());
         alert.showAndWait();
     }
 
