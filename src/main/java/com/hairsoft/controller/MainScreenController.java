@@ -5,7 +5,6 @@ import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.entity.UsuarioSalao;
 import com.hairsoft.hairsoft.MainScreenApp;
-import com.hairsoft.method.MainScreenMethod;
 
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.hairsoft.method.ValidaCNPJ;
@@ -37,7 +36,7 @@ public class MainScreenController implements Initializable {
 
     public String Nome, Email;
 
-    ErroDialog dialog;
+    ErroDialog dialog = new ErroDialog();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,11 +73,11 @@ public class MainScreenController implements Initializable {
 
 
             if (nomeSalao.isEmpty()){
-                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
+                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMenssageErroIsEmpty());
             }else if (CNPJ.isEmpty()){
-                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
-//          }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
-//                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
+                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMenssageErroIsEmpty());
+            }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
+                alertDialog(dialog.getTitleErroCNPJ(), dialog.getMessegeErroCNPJ());
             }
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
@@ -87,7 +86,7 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            alertDialog(dialog.getTitleErroSys(),dialog.getMensagemErroSys());
+            alertDialog(dialog.getTitleErroSys(),dialog.getMenssageErroSys());
         }
     }
 
@@ -110,13 +109,15 @@ public class MainScreenController implements Initializable {
     void btnSalvarSalao_click(ActionEvent event) {
         addSalao();
         paneContainerSalao.setVisible(false);
+        txfCnpjSalao.clear();
+        txfNomeSalao.clear();
     }
 
-    public void alertDialog(String Title, String Messege){
+    public void alertDialog(String Title, String Message){
         Alert alert;
         alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(dialog.getTitiloErroIsEmpty());
-        alert.setHeaderText(dialog.getMensagemErroIsEmpty());
+        alert.setTitle(Title);
+        alert.setHeaderText(Message);
         alert.showAndWait();
     }
 
