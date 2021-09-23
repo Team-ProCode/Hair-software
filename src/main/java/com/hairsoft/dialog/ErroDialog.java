@@ -5,11 +5,12 @@ public class ErroDialog {
     public String Title;
     public String Messege;
 
+    //Mainscreen Errors
     public String getTitleErroIsEmpty() {
         return "Registro incompleto";
     }
 
-    public String getMensageErroIsEmpty() {
+    public String getMessageErroIsEmpty() {
         return "Verifique se os campos de inserção estão corretos";
     }
 
@@ -25,7 +26,7 @@ public class ErroDialog {
         return "Erro de validação!";
     }
 
-    public String getMessegeErroCNPJ(){
+    public String getMessageErroCNPJ(){
         return "Insira um CNPJ valido!";
     }
 

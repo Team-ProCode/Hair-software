@@ -78,12 +78,12 @@
                            <children>
                               <Pane fx:id="paneSalão" layoutX="15.0" prefHeight="119.0" prefWidth="350.0">
                                  <children>
-                                    <Label layoutX="18.0" layoutY="11.0" text="ID:" />
+                                    <Label layoutX="18.0" layoutY="11.0" text="ID:" textFill="#868686" />
                                     <Label layoutX="17.0" layoutY="47.0" text="Nome:" />
                                     <Label layoutX="17.0" layoutY="81.0" text="Cnpj:" />
                                     <TextField fx:id="txfIdSalao" layoutX="37.0" layoutY="9.0" prefHeight="26.0" prefWidth="159.0" />
-                                    <TextField fx:id="txfNomeSalao" layoutX="60.0" layoutY="44.0" prefHeight="26.0" prefWidth="136.0" />
-                                    <TextField fx:id="txfCnpjSalao" layoutX="50.0" layoutY="79.0" prefHeight="26.0" prefWidth="146.0" />
+                                    <TextField fx:id="txfNomeSalao" editable="false" layoutX="60.0" layoutY="44.0" prefHeight="26.0" prefWidth="136.0" promptText="Nome do estabelecimento" />
+                                    <TextField fx:id="txfCnpjSalao" editable="false" layoutX="50.0" layoutY="79.0" prefHeight="26.0" prefWidth="146.0" promptText="CNPJ" />
                                     <Button fx:id="btnDeletarSalao" layoutX="219.0" layoutY="71.0" mnemonicParsing="false" onAction="#btnDeletarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Deletar" />
                                     <Button fx:id="btnSalvarSalao" layoutX="219.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnSalvarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Salvar" />
                                  </children>

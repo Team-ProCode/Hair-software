@@ -37,7 +37,7 @@ public class MainScreenController implements Initializable {
 
     public String Nome, Email;
 
-    ErroDialog dialog;
+    ErroDialog dialog = new ErroDialog();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,11 +74,11 @@ public class MainScreenController implements Initializable {
 
 
             if (nomeSalao.isEmpty()){
-                alertDialog(dialog.getTitiloErroIsEmpty(),dialog.getMensagemErroIsEmpty());
+                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else if (CNPJ.isEmpty()){
-                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMenssageErroIsEmpty());
+                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
-                alertDialog(dialog.getTitleErroCNPJ(), dialog.getMessegeErroCNPJ());
+                alertDialog(dialog.getTitleErroCNPJ(), dialog.getMessageErroCNPJ());
             }
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
@@ -87,7 +87,7 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            alertDialog(dialog.getTitleErroSys(),dialog.getMensagemErroSys());
+            alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
     }
 
@@ -115,8 +115,8 @@ public class MainScreenController implements Initializable {
     public void alertDialog(String Title, String Messege){
         Alert alert;
         alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(dialog.getTitiloErroIsEmpty());
-        alert.setHeaderText(dialog.getMensagemErroIsEmpty());
+        alert.setTitle(Title);
+        alert.setHeaderText(Messege);
         alert.showAndWait();
     }
 
