@@ -7,6 +7,7 @@ module com.hairsoft.hairsoft {
     requires org.kordamp.bootstrapfx.core;
     requires javafx.graphics;
     requires charm.glisten;
+    requires java.sql;
 
     opens com.hairsoft.hairsoft to javafx.fxml;
     exports com.hairsoft.hairsoft;

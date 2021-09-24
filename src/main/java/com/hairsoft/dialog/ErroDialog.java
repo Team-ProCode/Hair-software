@@ -5,11 +5,12 @@ public class ErroDialog {
     public String Title;
     public String Messege;
 
-    public String getTitiloErroIsEmpty() {
+    //Mainscreen Errors
+    public String getTitleErroIsEmpty() {
         return "Registro incompleto";
     }
 
-    public String getMensagemErroIsEmpty() {
+    public String getMessageErroIsEmpty() {
         return "Verifique se os campos de inserção estão corretos";
     }
 
@@ -17,8 +18,16 @@ public class ErroDialog {
         return "Erro no sistema";
     }
 
-    public String getMensagemErroSys() {
+    public String getMensageErroSys() {
         return "Não foi possivel completar a ação!";
+    }
+
+    public String getTitleErroCNPJ(){
+        return "Erro de validação!";
+    }
+
+    public String getMessageErroCNPJ(){
+        return "Insira um CNPJ valido!";
     }
 
 }
