@@ -108,6 +108,11 @@ public class LoginController implements Initializable {
                     LoginApp.getStage().close();
                     return;
                 }
+//                Configurar melhor para que aceite email e usuario no login
+//                else if (usuario.usuario.equals(usuario) && usuario.senha.equals(senha)){
+//                    callScreen(usuario.email, usuario.usuario);
+//                    LoginApp.getStage().close();
+//                }
             }
 
             throw new IOException();
