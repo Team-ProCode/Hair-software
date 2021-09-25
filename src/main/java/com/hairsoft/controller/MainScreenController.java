@@ -35,6 +35,7 @@ public class MainScreenController implements Initializable {
     public ArrayList<Salao> salaos = new ArrayList<>();
     public ArrayList<UsuarioSalao> usuarioSalaos = new ArrayList<>();
 
+    public int ID;
     public String Nome, Email;
 
     ErroDialog dialog;
@@ -44,11 +45,14 @@ public class MainScreenController implements Initializable {
         listInMemory();
     }
 
+
     public void listInMemory(){
+
         usuarios = MainScreenApp.usuarios;
 
         Nome = MainScreenApp.Nome;
         Email = MainScreenApp.Email;
+        ID = idUsuario();
 
         lblWellcomeName.setText("Bem vindo(a) " + Nome);
     }
