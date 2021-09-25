@@ -28,6 +28,7 @@ public class LoginController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb){
         usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
+
     }
 
 	//public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
