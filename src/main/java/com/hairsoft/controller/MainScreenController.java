@@ -60,7 +60,7 @@ public class MainScreenController implements Initializable {
     //Este codigo esta com um erro, é preciso inserir um atributo salão dentro de um usuario
     public int idUsuario(){
         for(Usuario usuario: usuarios) {
-            if (usuario.email.equals(Email) && usuario.usuario.equals(Nome)) {
+            if (usuario.email.equals(Email) && Usuario.usuario.equals(Nome)) {
                 return usuario.getID();
             }
         }
@@ -78,11 +78,11 @@ public class MainScreenController implements Initializable {
 
 
             if (nomeSalao.isEmpty()){
-                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
+                ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else if (CNPJ.isEmpty()){
-                alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
+                ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else if (!ValidaCNPJ.isCNPJ(CNPJ)){
-                alertDialog(dialog.getTitleErroCNPJ(), dialog.getMessageErroCNPJ());
+                ErroDialog.alertDialog(dialog.getTitleErroCNPJ(), dialog.getMessageErroCNPJ());
             }
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
@@ -91,7 +91,7 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
+            ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
     }
 
@@ -116,12 +116,6 @@ public class MainScreenController implements Initializable {
         paneContainerSalao.setVisible(false);
     }
 
-    public void alertDialog(String Title, String Messege){
-        Alert alert;
-        alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(Title);
-        alert.setHeaderText(Messege);
-        alert.showAndWait();
-    }
+
 
 }

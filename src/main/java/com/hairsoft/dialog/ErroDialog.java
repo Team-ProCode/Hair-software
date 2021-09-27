@@ -1,5 +1,7 @@
 package com.hairsoft.dialog;
 
+import javafx.scene.control.Alert;
+
 public class ErroDialog {
 
     public String Title;
@@ -30,4 +32,20 @@ public class ErroDialog {
         return "Insira um CNPJ valido!";
     }
 
+    public String getTitleErroLogin() {
+        return "Erro de validação!";
+    }
+
+    public String getMessegeErroLogin(){
+        return "Usuario/E-mail ou Senha não encontrados!";
+    }
+
+
+    public static void alertDialog(String Title, String Messege){
+        Alert alert;
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Title);
+        alert.setHeaderText(Messege);
+        alert.showAndWait();
+    }
 }

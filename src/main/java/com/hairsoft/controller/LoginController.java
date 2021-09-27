@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.hairsoft.dialog.ErroDialog;
 import com.hairsoft.method.Validation;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.hairsoft.LoginApp;
@@ -25,6 +26,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
 
     public ArrayList<Usuario> usuarios = new ArrayList<>();
+
+    ErroDialog dialog = new ErroDialog();
 
     public void initialize(URL url, ResourceBundle rb){
         usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
@@ -68,7 +71,13 @@ public class LoginController implements Initializable {
                 alert.setTitle("Registro incorreto!");
                 alert.setHeaderText("Por favor insira um usuario valido!!");
                 alert.showAndWait();
-            }else if(Usuario.equalEmail(usuarios , email)){
+            }else if (Usuario.equalUser(usuarios, nome)){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Registro incorreto!");
+                alert.setHeaderText("Nome de usuario ja esta sendo utilizado!");
+                alert.showAndWait();
+            }
+            else if(Usuario.equalEmail(usuarios , email)){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registro incorreto!");
                 alert.setHeaderText("Ja existe um usuario usando este Email!!");
@@ -99,30 +108,21 @@ public class LoginController implements Initializable {
     public void logar(){
         Alert alert;
         try {
-            String email, senha;
-            email = txfEmail.getText();
+            String userOrEmail, senha;
+            userOrEmail = txfEmail.getText();
             senha = txfSenha.getText();
 
             for(Usuario usuario: usuarios) {
-                if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
-                    callScreen(usuario.email, usuario.usuario);
+                if (Usuario.usuario.equals(userOrEmail) | Usuario.usuario.equals(userOrEmail) && usuario.senha.equals(senha)) {
+                    callScreen(usuario.email, Usuario.usuario);
                     LoginApp.getStage().close();
                     return;
                 }
-//                Configurar melhor para que aceite email e usuario no login
-//                else if (usuario.usuario.equals(usuario) && usuario.senha.equals(senha)){
-//                    callScreen(usuario.email, usuario.usuario);
-//                    LoginApp.getStage().close();
-//                }
             }
-
             throw new IOException();
         } catch (IOException var4) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ops");
-            alert.setHeaderText("A operação não pode ser realizada.");
-            alert.setContentText("Digite um numero para pesquisar!!");
-            alert.showAndWait();
+            ErroDialog.alertDialog(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
+
         } catch (Exception var5) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ops");
