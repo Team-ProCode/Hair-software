@@ -111,7 +111,7 @@ public class LoginController implements Initializable {
 
             for(Usuario usuario: usuarios) {
               
-                if (Usuario.usuario.equals(userOrEmail) | Usuario.usuario.equals(userOrEmail) && usuario.senha.equals(senha)) {
+                if (usuario.usuario.equals(userOrEmail) | usuario.email.equals(userOrEmail) && usuario.senha.equals(senha)) {
                     System.out.println("Encontrou usuario line:108");
                     callScreen(usuario.email, usuario.usuario);
                     System.out.println("Chamou metodo line:110");
