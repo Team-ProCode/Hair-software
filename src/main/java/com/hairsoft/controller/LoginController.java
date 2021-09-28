@@ -67,10 +67,7 @@ public class LoginController implements Initializable {
             senha = txfRegSenha.getText();
 
             if(nome.isEmpty()){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Por favor insira um usuario valido!!");
-                alert.showAndWait();
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
             }else if (Usuario.equalUser(usuarios, nome)){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registro incorreto!");
@@ -122,28 +119,16 @@ public class LoginController implements Initializable {
             throw new IOException();
         } catch (IOException var4) {
             ErroDialog.alertDialog(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
-
-        } catch (Exception var5) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ops");
-            alert.setHeaderText("A operação não pode ser realizada.");
-            alert.setContentText("Verifique se digitou corretamente!!");
-            alert.showAndWait();
         }
     }
 
     public void callScreen(String Email, String Nome){
-        Alert alert;
         MainScreenApp screenApp = new MainScreenApp();
         try{
             MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
             screenApp.start(new Stage());
         }catch (Exception e){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Erro na execução da instancia.");
-            alert.setContentText("Contacte o supporte para lhe auxiliar!!");
-            alert.showAndWait();
+            ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
         }
     }
 

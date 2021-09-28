@@ -4,10 +4,14 @@ import javafx.scene.control.Alert;
 
 public class ErroDialog {
 
-    public String Title;
-    public String Messege;
-
-    //Mainscreen Errors
+    public static void alertDialog(String Title, String Messege){
+        Alert alert;
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Title);
+        alert.setHeaderText(Messege);
+        alert.showAndWait();
+    }
+//    Mainscreen Errors
     public String getTitleErroIsEmpty() {
         return "Registro incompleto";
     }
@@ -32,20 +36,28 @@ public class ErroDialog {
         return "Insira um CNPJ valido!";
     }
 
+//    LoginController Errors
     public String getTitleErroLogin() {
-        return "Erro de validação!";
-    }
+    return "Erro de validação!";
+}
 
     public String getMessegeErroLogin(){
         return "Usuario/E-mail ou Senha não encontrados!";
     }
 
+    public String getTitleErroCallScreen(){
+        return "Erro na execução da instancia!";
+    }
 
-    public static void alertDialog(String Title, String Messege){
-        Alert alert;
-        alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(Title);
-        alert.setHeaderText(Messege);
-        alert.showAndWait();
+    public String getMessageErroCallScreen(){
+        return "Contate o suporte tecnico!";
+    }
+
+    public String getTitleRegisterWrong(){
+        return "Registro incorreto!";
+    }
+
+    public String getMessageRegisterWrong(){
+        return "Por favor insira um usuario valido!";
     }
 }
