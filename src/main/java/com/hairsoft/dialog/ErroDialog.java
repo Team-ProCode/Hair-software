@@ -1,9 +1,19 @@
 package com.hairsoft.dialog;
 
+import javafx.scene.control.Alert;
+
 public class ErroDialog {
 
     public String Title;
     public String Messege;
+
+    public static void alertDialog(String Title, String Messege){
+        Alert alert;
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(Title);
+        alert.setHeaderText(Messege);
+        alert.showAndWait();
+    }
 
     //Mainscreen Errors
     public String getTitleErroIsEmpty() {

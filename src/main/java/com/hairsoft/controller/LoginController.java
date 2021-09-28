@@ -105,15 +105,14 @@ public class LoginController implements Initializable {
 
             for(Usuario usuario: usuarios) {
                 if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
+                    System.out.println("Encontrou usuario line:108");
                     callScreen(usuario.email, usuario.usuario);
+                    System.out.println("Chamou metodo line:110");
                     LoginApp.getStage().close();
+                    System.out.println("Fechou tela de login line:112");
                     return;
                 }
-//                Configurar melhor para que aceite email e usuario no login
-//                else if (usuario.usuario.equals(usuario) && usuario.senha.equals(senha)){
-//                    callScreen(usuario.email, usuario.usuario);
-//                    LoginApp.getStage().close();
-//                }
+
             }
 
             throw new IOException();
@@ -135,9 +134,13 @@ public class LoginController implements Initializable {
     public void callScreen(String Email, String Nome){
         Alert alert;
         MainScreenApp screenApp = new MainScreenApp();
+        System.out.println("Intancia Main Screen line:136");
         try{
+
             MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
+            System.out.println("Usuario call back line:140");
             screenApp.start(new Stage());
+            System.out.println("Iniciando instancia line:142");
         }catch (Exception e){
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
