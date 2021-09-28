@@ -2,9 +2,6 @@ package com.hairsoft.dialog;
 
 import javafx.scene.control.Alert;
 
-
-public class ErroDialog {
-
 public class ErroDialog {
 
     public static void alertDialog(String Title, String Messege){

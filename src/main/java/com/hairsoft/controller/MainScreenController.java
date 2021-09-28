@@ -80,7 +80,7 @@ public class MainScreenController implements Initializable {
     //Este codigo esta com um erro, é preciso inserir um atributo salão dentro de um usuario
     public int idUsuario(){
         for(Usuario usuario: usuarios) {
-            if (usuario.email.equals(Email) && Usuario.usuario.equals(Nome)) {
+            if (usuario.email.equals(Email) && usuario.usuario.equals(Nome)) {
                 return usuario.getID();
             }
         }
