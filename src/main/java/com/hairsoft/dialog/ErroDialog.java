@@ -2,7 +2,7 @@ package com.hairsoft.dialog;
 
 import javafx.scene.control.Alert;
 
-public class ErroDialog {
+public class ErroDialog{
 
     public static void alertDialog(String Title, String Messege){
         Alert alert;
@@ -11,7 +11,7 @@ public class ErroDialog {
         alert.setHeaderText(Messege);
         alert.showAndWait();
     }
-
+// MainScreen errors
     public String getTitleErroIsEmpty() {
         return "Registro incompleto";
     }
@@ -57,7 +57,27 @@ public class ErroDialog {
         return "Registro incorreto!";
     }
 
-    public String getMessageRegisterWrong(){
+    public String getMessageRegisterUserExists(){
         return "Por favor insira um usuario valido!";
+    }
+
+    public String getMessageRegisterEmailExists(){
+        return "Ja existe um usuario usando este Email!!";
+    }
+
+    public String getMessageRegisterValidEmail(){
+        return "Insira um E-mail valido!!";
+    }
+
+    public String getMessageValidPassword(){
+        return "A senha precisa de no minimo 8 caracteres";
+    }
+
+    public String getTitleErroGenericReg(){
+        return "Ops!";
+    }
+
+    public String getMessageErroGenericReg(){
+        return "A operação não pode ser realizada." + "\n" + "Verifique se digitou corretamente!!";
     }
 }

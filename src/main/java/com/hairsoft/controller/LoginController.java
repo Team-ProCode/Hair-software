@@ -69,36 +69,20 @@ public class LoginController implements Initializable {
             if(nome.isEmpty()){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
             }else if (Usuario.equalUser(usuarios, nome)){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Nome de usuario ja esta sendo utilizado!");
-                alert.showAndWait();
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterUserExists());
             }
             else if(Usuario.equalEmail(usuarios , email)){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Ja existe um usuario usando este Email!!");
-                alert.showAndWait();
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterEmailExists());
             }else if(!Validation.isValidEmail(email)){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Por favor insira um email valido!!");
-                alert.showAndWait();
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterValidEmail());
             }else if(!Validation.isValidSenha(senha)){
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Senha precisa ter no maximo 8 caracteres!!");
-                alert.showAndWait();
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidPassword());
             }else{
                 usuarios.add(new Usuario(Usuario.gerarId(usuarios),nome, email, senha ));
                 register_off();
             }
         }catch(Exception e){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ops");
-            alert.setHeaderText("A operação não pode ser realizada.");
-            alert.setContentText("Verifique se digitou corretamente!!");
-            alert.showAndWait();
+            ErroDialog.alertDialog(dialog.getTitleErroGenericReg(), dialog.getMessageErroGenericReg());
         }
     }
 
@@ -112,11 +96,11 @@ public class LoginController implements Initializable {
             for(Usuario usuario: usuarios) {
               
                 if (usuario.usuario.equals(userOrEmail) | usuario.email.equals(userOrEmail) && usuario.senha.equals(senha)) {
-                    System.out.println("Encontrou usuario line:108");
+                    System.out.println("Encontrou usuario line:99");
                     callScreen(usuario.email, usuario.usuario);
-                    System.out.println("Chamou metodo line:110");
+                    System.out.println("Chamou metodo line:101");
                     LoginApp.getStage().close();
-                    System.out.println("Fechou tela de login line:112");
+                    System.out.println("Fechou tela de login line:103");
                     return;
                 }
 
@@ -130,13 +114,13 @@ public class LoginController implements Initializable {
 
     public void callScreen(String Email, String Nome){
         MainScreenApp screenApp = new MainScreenApp();
-        System.out.println("Intancia Main Screen line:136");
+        System.out.println("Intancia Main Screen line:117");
         try{
 
             MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
-            System.out.println("Usuario call back line:140");
+            System.out.println("Usuario call back line:121");
             screenApp.start(new Stage());
-            System.out.println("Iniciando instancia line:142");
+            System.out.println("Iniciando instancia line:123");
         }catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
         }
