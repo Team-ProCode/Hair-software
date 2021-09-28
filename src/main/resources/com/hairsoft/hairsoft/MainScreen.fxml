@@ -76,16 +76,17 @@
                            </children></Pane>
                         <AnchorPane fx:id="paneContainerSalao" layoutX="11.0" layoutY="178.0" prefHeight="129.0" prefWidth="379.0" visible="false">
                            <children>
-                              <Pane fx:id="paneSalão" layoutX="15.0" prefHeight="119.0" prefWidth="350.0">
+                              <Pane fx:id="paneSalao" layoutX="15.0" prefHeight="119.0" prefWidth="350.0">
                                  <children>
                                     <Label layoutX="18.0" layoutY="11.0" text="ID:" textFill="#868686" />
                                     <Label layoutX="17.0" layoutY="47.0" text="Nome:" />
                                     <Label layoutX="17.0" layoutY="81.0" text="Cnpj:" />
-                                    <TextField fx:id="txfIdSalao" layoutX="37.0" layoutY="9.0" prefHeight="26.0" prefWidth="173.0" />
+                                    <TextField fx:id="txfIdSalao" layoutX="38.0" layoutY="9.0" prefHeight="26.0" prefWidth="173.0" />
                                     <TextField fx:id="txfNomeSalao" layoutX="60.0" layoutY="44.0" prefHeight="26.0" prefWidth="152.0" promptText="Nome do estabelecimento" />
-                                    <TextField fx:id="txfCnpjSalao" layoutX="50.0" layoutY="79.0" prefHeight="26.0" prefWidth="152.0" promptText="CNPJ" />
-                                    <Button fx:id="btnDeletarSalao" layoutX="219.0" layoutY="71.0" mnemonicParsing="false" onAction="#btnDeletarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Deletar" />
-                                    <Button fx:id="btnSalvarSalao" layoutX="219.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnSalvarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Salvar" />
+                                    <TextField fx:id="txfCnpjSalao" layoutX="50.0" layoutY="79.0" prefHeight="26.0" prefWidth="162.0" promptText="CNPJ" />
+                                    <Button fx:id="btnDeletarSalao" layoutX="219.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnDeletarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Deletar" />
+                                    <Button fx:id="btnCancelarSalao" layoutX="219.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnCancelarSalao_click" prefHeight="36.0" prefWidth="117.0" text="Cancelar" />
+                                    <Button fx:id="btnSalvarSalao" layoutX="219.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnSalvarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Salvar" />
                                  </children>
                               </Pane>
                            </children>
@@ -117,15 +118,14 @@
          </tabs>
       </TabPane>
       <Pane prefHeight="42.0" prefWidth="400.0">
-         <children>
-            <Label fx:id="lblUsuario" layoutX="318.0" layoutY="10.0" text="Usuario" />
-            <Avatar fx:id="avatar1" layoutX="364.0" layoutY="1.0">
-               <image>
-                  <Image url="@image/Avatar-Mask.png" />
-               </image>
-            </Avatar>
-            <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
-         </children>
+         <Label fx:id="lblUsuario" layoutX="318.0" layoutY="10.0" text="Usuario"/>
+         <Avatar fx:id="avatar1" layoutX="364.0" layoutY="1.0">
+            <image>
+               <Image url="@image/Avatar-Mask.png"/>
+            </image>
+         </Avatar>
+         <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT"
+                   opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-"/>
       </Pane>
    </children>
 </AnchorPane>

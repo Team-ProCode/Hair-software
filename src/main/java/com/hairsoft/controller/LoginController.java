@@ -110,11 +110,17 @@ public class LoginController implements Initializable {
             senha = txfSenha.getText();
 
             for(Usuario usuario: usuarios) {
+              
                 if (Usuario.usuario.equals(userOrEmail) | Usuario.usuario.equals(userOrEmail) && usuario.senha.equals(senha)) {
-                    callScreen(usuario.email, Usuario.usuario);
+                    System.out.println("Encontrou usuario line:108");
+                    callScreen(usuario.email, usuario.usuario);
+                    System.out.println("Chamou metodo line:110");
                     LoginApp.getStage().close();
+                    System.out.println("Fechou tela de login line:112");
                     return;
                 }
+
+
             }
             throw new IOException();
         } catch (IOException var4) {
@@ -124,9 +130,13 @@ public class LoginController implements Initializable {
 
     public void callScreen(String Email, String Nome){
         MainScreenApp screenApp = new MainScreenApp();
+        System.out.println("Intancia Main Screen line:136");
         try{
+
             MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
+            System.out.println("Usuario call back line:140");
             screenApp.start(new Stage());
+            System.out.println("Iniciando instancia line:142");
         }catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
         }
