@@ -2,10 +2,10 @@ package com.hairsoft.dialog;
 
 import javafx.scene.control.Alert;
 
+
 public class ErroDialog {
 
-    public String Title;
-    public String Messege;
+public class ErroDialog {
 
     public static void alertDialog(String Title, String Messege){
         Alert alert;
@@ -15,7 +15,6 @@ public class ErroDialog {
         alert.showAndWait();
     }
 
-    //Mainscreen Errors
     public String getTitleErroIsEmpty() {
         return "Registro incompleto";
     }
@@ -40,4 +39,28 @@ public class ErroDialog {
         return "Insira um CNPJ valido!";
     }
 
+//    LoginController Errors
+    public String getTitleErroLogin() {
+    return "Erro de validação!";
+}
+
+    public String getMessegeErroLogin(){
+        return "Usuario/E-mail ou Senha não encontrados!";
+    }
+
+    public String getTitleErroCallScreen(){
+        return "Erro na execução da instancia!";
+    }
+
+    public String getMessageErroCallScreen(){
+        return "Contate o suporte tecnico!";
+    }
+
+    public String getTitleRegisterWrong(){
+        return "Registro incorreto!";
+    }
+
+    public String getMessageRegisterWrong(){
+        return "Por favor insira um usuario valido!";
+    }
 }

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.hairsoft.dialog.ErroDialog;
 import com.hairsoft.method.Validation;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.hairsoft.LoginApp;
@@ -25,6 +26,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable {
 
     public ArrayList<Usuario> usuarios = new ArrayList<>();
+
+    ErroDialog dialog = new ErroDialog();
 
     public void initialize(URL url, ResourceBundle rb){
         usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
@@ -64,11 +67,14 @@ public class LoginController implements Initializable {
             senha = txfRegSenha.getText();
 
             if(nome.isEmpty()){
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
+            }else if (Usuario.equalUser(usuarios, nome)){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registro incorreto!");
-                alert.setHeaderText("Por favor insira um usuario valido!!");
+                alert.setHeaderText("Nome de usuario ja esta sendo utilizado!");
                 alert.showAndWait();
-            }else if(Usuario.equalEmail(usuarios , email)){
+            }
+            else if(Usuario.equalEmail(usuarios , email)){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Registro incorreto!");
                 alert.setHeaderText("Ja existe um usuario usando este Email!!");
@@ -99,12 +105,13 @@ public class LoginController implements Initializable {
     public void logar(){
         Alert alert;
         try {
-            String email, senha;
-            email = txfEmail.getText();
+            String userOrEmail, senha;
+            userOrEmail = txfEmail.getText();
             senha = txfSenha.getText();
 
             for(Usuario usuario: usuarios) {
-                if (usuario.email.equals(email) && usuario.senha.equals(senha)) {
+              
+                if (Usuario.usuario.equals(userOrEmail) | Usuario.usuario.equals(userOrEmail) && usuario.senha.equals(senha)) {
                     System.out.println("Encontrou usuario line:108");
                     callScreen(usuario.email, usuario.usuario);
                     System.out.println("Chamou metodo line:110");
@@ -113,26 +120,15 @@ public class LoginController implements Initializable {
                     return;
                 }
 
-            }
 
+            }
             throw new IOException();
         } catch (IOException var4) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ops");
-            alert.setHeaderText("A operação não pode ser realizada.");
-            alert.setContentText("Digite um numero para pesquisar!!");
-            alert.showAndWait();
-        } catch (Exception var5) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Ops");
-            alert.setHeaderText("A operação não pode ser realizada.");
-            alert.setContentText("Verifique se digitou corretamente!!");
-            alert.showAndWait();
+            ErroDialog.alertDialog(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
         }
     }
 
     public void callScreen(String Email, String Nome){
-        Alert alert;
         MainScreenApp screenApp = new MainScreenApp();
         System.out.println("Intancia Main Screen line:136");
         try{
@@ -142,11 +138,7 @@ public class LoginController implements Initializable {
             screenApp.start(new Stage());
             System.out.println("Iniciando instancia line:142");
         }catch (Exception e){
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Erro na execução da instancia.");
-            alert.setContentText("Contacte o supporte para lhe auxiliar!!");
-            alert.showAndWait();
+            ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
         }
     }
 

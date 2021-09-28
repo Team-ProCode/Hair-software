@@ -6,7 +6,7 @@ import java.util.List;
 public class Usuario {
 
 	public Integer ID;
-	public String usuario;
+	public static String usuario;
 	public String email;
 	public String senha;
 
@@ -17,7 +17,7 @@ public class Usuario {
 	
 	public Usuario(int id, String usuario, String email, String senha) {
 		this.ID = id;
-		this.usuario = usuario;
+		Usuario.usuario = usuario;
 		this.email = email;
 		this.senha = senha;
 	}
@@ -34,6 +34,19 @@ public class Usuario {
 			}
 			return Id;
 		}
+	}
+
+	public static boolean equalUser(ArrayList<Usuario> usuarios, String usuario1){
+		if (usuarios.isEmpty()){
+			return false;
+		}else{
+			for (Usuario usuario: usuarios){
+				if (Usuario.usuario.equals(usuario1)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static boolean equalEmail(ArrayList<Usuario> usuarios, String email){
@@ -58,7 +71,7 @@ public class Usuario {
 	}
 
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		Usuario.usuario = usuario;
 	}
 
 	public String getUsuario() {

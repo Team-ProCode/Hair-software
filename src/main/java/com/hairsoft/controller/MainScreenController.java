@@ -80,7 +80,7 @@ public class MainScreenController implements Initializable {
     //Este codigo esta com um erro, é preciso inserir um atributo salão dentro de um usuario
     public int idUsuario(){
         for(Usuario usuario: usuarios) {
-            if (usuario.email.equals(Email) && usuario.usuario.equals(Nome)) {
+            if (usuario.email.equals(Email) && Usuario.usuario.equals(Nome)) {
                 return usuario.getID();
             }
         }
@@ -153,7 +153,8 @@ public class MainScreenController implements Initializable {
     public void addCombSalao(){
         cmbSalaoHome.getItems().clear();
         cmbSalaoBar.getItems().clear();
-        for (Salao salao: salaos){
+        
+      for (Salao salao: salaos){
             cmbSalaoHome.getItems().add(salao.ID + ": " + salao.Nome);
             cmbSalaoBar.getItems().add(salao.ID + ": " + salao.Nome);
         }
@@ -218,6 +219,7 @@ public class MainScreenController implements Initializable {
             addSalao();
         }
     }
+
 
     public void logs(String v){
         System.out.println(v);
