@@ -42,6 +42,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Box?>
 <?import javafx.scene.text.Font?>
 
@@ -107,7 +108,11 @@
             </Tab>
             <Tab fx:id="tabFeatures11" text="Clientes">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutY="64.0" prefHeight="442.0" prefWidth="406.0" />
+                        <AnchorPane layoutX="-2.0" layoutY="-4.0" prefHeight="78.0" prefWidth="408.0" />
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab fx:id="tabFeatures111" text="Configuração">
@@ -118,14 +123,13 @@
          </tabs>
       </TabPane>
       <Pane prefHeight="42.0" prefWidth="400.0">
-         <Label fx:id="lblUsuario" layoutX="318.0" layoutY="10.0" text="Usuario"/>
+         <Label fx:id="lblUsuario" layoutX="318.0" layoutY="10.0" text="Usuario" />
          <Avatar fx:id="avatar1" layoutX="364.0" layoutY="1.0">
             <image>
-               <Image url="@image/Avatar-Mask.png"/>
+               <Image url="@image/Avatar-Mask.png" />
             </image>
          </Avatar>
-         <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT"
-                   opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-"/>
+         <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
       </Pane>
    </children>
 </AnchorPane>

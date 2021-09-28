@@ -53,17 +53,6 @@ public class MainScreenController implements Initializable {
 
     public void connectionListis(){
         listInMemoryUser();
-
-//        if(!usuarioSalaos.isEmpty()){
-//            for (UsuarioSalao usuarioSalao: usuarioSalaos){
-//                if(usuarioSalao.IdUser == ID){
-//                    for(Salao salao: salaos){
-//                        salao.
-//                    }
-//                }
-//            }
-//        }
-
     }
 
 
@@ -74,6 +63,7 @@ public class MainScreenController implements Initializable {
         Email = MainScreenApp.Email;
         ID = idUsuario();
 
+        lblUsuario.setText(Nome);
         lblWellcomeName.setText("Bem vindo(a) " + Nome);
     }
 
@@ -87,26 +77,32 @@ public class MainScreenController implements Initializable {
         return 0;
     }
 
-    public void limpaSalao(){
-        txfNomeSalao.clear();
-        txfCnpjSalao.clear();
+    public void habilitarCamposSalao(){
+        btnEditarSalao.setDisable(true);
+        btnDeletarSalao.setDisable(true);
 
+        paneContainerSalao.setVisible(true);
+    }
+
+    public void desabilitarCamposSalao(){
         btnAdicionarSalao.setDisable(false);
         btnEditarSalao.setDisable(false);
-        btnDeletarSalao.setDisable(false);
 
+        txfIdSalao.setDisable(false);
+        txfCnpjSalao.setDisable(false);
         paneContainerSalao.setVisible(false);
+    }
+
+    public void LimparCamposSalao(){
+        txfNomeSalao.clear();
+        txfCnpjSalao.clear();
     }
 
     public void addSalao() {
         try {
-            int Id;
-            String nomeSalao, CNPJ;
-
-            Id = Integer.parseInt(txfIdSalao.getText());
-            nomeSalao = txfNomeSalao.getText();
-            CNPJ = txfCnpjSalao.getText();
-
+            int Id = Integer.parseInt(txfIdSalao.getText());
+            String nomeSalao = txfNomeSalao.getText();
+            String CNPJ = txfCnpjSalao.getText();
 
             if (nomeSalao.isEmpty()){
                 ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
@@ -119,8 +115,10 @@ public class MainScreenController implements Initializable {
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
                 usuarioSalaos.add(new UsuarioSalao(idUsuario(), Id));
+
                 addCombSalao();
-                limpaSalao();
+                LimparCamposSalao();
+                desabilitarCamposSalao();
             }
         }
         catch (Exception e){
@@ -130,7 +128,6 @@ public class MainScreenController implements Initializable {
 
     public final void editarSalao(){
         try {
-            logs("Entrou no metodo editarSalao, line: 132");
             int Id = Integer.parseInt(txfIdSalao.getText());
 
             if (txfNomeSalao.getText().equals("")){
@@ -141,9 +138,28 @@ public class MainScreenController implements Initializable {
                         salao.setNome(txfNomeSalao.getText());
                     }
                 }
+
                 addCombSalao();
-                limpaSalao();
+                LimparCamposSalao();
+                desabilitarCamposSalao();
             }
+        }
+        catch (Exception e){
+            ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
+        }
+    }
+
+    public void deletarSalao(){
+        try {
+            int Id = Integer.parseInt(txfIdSalao.getText());
+
+            salaos.remove(Id);
+
+            btnDeletarSalao.setDisable(true);
+            addCombSalao();
+            LimparCamposSalao();
+            desabilitarCamposSalao();
+
         }
         catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
@@ -163,17 +179,11 @@ public class MainScreenController implements Initializable {
     @FXML void btnAdicionarSalao_click(ActionEvent event) {
         logs("btnAdicionar ativado, line: 162");
         Operacao = "adicionar";
-
-        btnEditarSalao.setDisable(true);
-        btnDeletarSalao.setDisable(true);
-
-        paneContainerSalao.setVisible(true);
         txfIdSalao.setText(Integer.toString(Salao.gerarId(salaos)));
-    }
 
-    @FXML
-    void btnDeletarSalao_click(ActionEvent event) {
+        btnDeletarSalao.setDisable(false);
 
+        habilitarCamposSalao();
     }
 
     @FXML
@@ -185,9 +195,13 @@ public class MainScreenController implements Initializable {
                 logs("Passou na condição IF do botão, line 180");
                 Operacao = "editar";
 
-                btnAdicionarSalao.setDisable(true);
+                habilitarCamposSalao();
 
-                paneContainerSalao.setVisible(true);
+                btnDeletarSalao.setDisable(false);
+                txfIdSalao.setDisable(true);
+                txfCnpjSalao.setDisable(true);
+
+                txfIdSalao.setText(Integer.toString(Salao.gerarId(salaos)));
 
                 Salao salao = Salao.buscaSalao(salaos, cmbSalaoHome.getValue().toString());
 
@@ -205,11 +219,17 @@ public class MainScreenController implements Initializable {
 
     }
 
-    @FXML
-    void btnCancelarSalao_click(ActionEvent event) {
 
+    @FXML
+    void btnDeletarSalao_click(ActionEvent event) {
+        deletarSalao();
     }
 
+    @FXML
+    void btnCancelarSalao_click(ActionEvent event) {
+        desabilitarCamposSalao();
+        LimparCamposSalao();
+    }
 
     @FXML
     void btnSalvarSalao_click(ActionEvent event) {
