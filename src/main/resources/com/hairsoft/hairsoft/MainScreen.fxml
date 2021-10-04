@@ -32,23 +32,23 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import com.gluonhq.charm.glisten.control.Avatar?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Box?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hairsoft.controller.MainScreenController">
    <children>
-      <TabPane layoutY="38.0" prefHeight="562.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="42.0" prefHeight="558.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="tabHome" text="Home">
                <content>
@@ -56,17 +56,17 @@
                      <children>
                         <Pane layoutX="33.0" layoutY="28.0" prefHeight="71.0" prefWidth="333.0">
                            <children>
-                              <Avatar fx:id="avatar" layoutX="12.0" layoutY="19.0">
-                                 <image>
-                                    <Image url="@image/Avatar-Mask.png" />
-                                 </image>
-                              </Avatar>
-                              <Label fx:id="lblWellcomeName" layoutX="52.0" layoutY="23.0" text="Bem Vindo(a)">
+                              <Box depth="100" drawMode="LINE" height="80.0" layoutX="166.0" layoutY="37.0" width="350.0" />
+                              <Label fx:id="lblWellcomeName" layoutX="94.0" layoutY="25.0" text="Bem Vindo(a)">
                                  <font>
                                     <Font name="Bodoni MT" size="22.0" />
                                  </font>
                               </Label>
-                              <Box depth="100" drawMode="LINE" height="80.0" layoutX="167.0" layoutY="37.0" width="350.0" />
+                              <ImageView fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/Avatar-Mask.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                         <Pane layoutX="30.0" layoutY="128.0" prefHeight="48.0" prefWidth="339.0">
@@ -110,26 +110,96 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutY="64.0" prefHeight="442.0" prefWidth="406.0" />
-                        <AnchorPane layoutX="-2.0" layoutY="-4.0" prefHeight="78.0" prefWidth="408.0" />
+                        <AnchorPane layoutX="-4.0" layoutY="77.0" prefHeight="461.0" prefWidth="408.0">
+                           <children>
+                              <TextField alignment="CENTER" layoutX="48.0" layoutY="46.0" prefHeight="36.0" prefWidth="314.0" promptText="Nome e sobrenome">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></TextField>
+                              <RadioButton layoutX="101.0" layoutY="349.0" mnemonicParsing="false" text="Homem">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></RadioButton>
+                              <RadioButton layoutX="215.0" layoutY="350.0" mnemonicParsing="false" text="Mulher">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></RadioButton>
+                              <TextField alignment="CENTER" layoutX="48.0" layoutY="94.0" prefHeight="36.0" prefWidth="314.0" promptText="Email">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" layoutX="48.0" layoutY="142.0" prefHeight="36.0" prefWidth="314.0" promptText="CPF">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" layoutX="48.0" layoutY="241.0" prefHeight="39.0" prefWidth="165.0" promptText="Fone">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Button layoutX="4.0" layoutY="385.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="200.0" text="C">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="205.0" layoutY="385.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="200.0" text="C">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Button>
+                              <TextField alignment="CENTER" layoutX="48.0" layoutY="294.0" prefHeight="39.0" prefWidth="232.0" promptText="Endereço">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" layoutX="285.0" layoutY="294.0" prefHeight="39.0" prefWidth="77.0" promptText="Nº">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField alignment="CENTER" layoutX="222.0" layoutY="241.0" prefHeight="39.0" prefWidth="141.0" promptText="Cep">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox layoutX="47.0" layoutY="193.0" prefHeight="36.0" prefWidth="183.0" promptText="Municipio" />
+                              <ComboBox layoutX="238.0" layoutY="193.0" prefHeight="36.0" prefWidth="125.0" promptText="Estado" />
+                              <Label layoutX="136.0" layoutY="8.0" text="Cadastrar Cliente">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="188.0" text="Pesquisar">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="202.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="188.0" text="Adicionar">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tabFeatures111" text="Configuração">
+            <Tab fx:id="tabFeatures111" closable="false" text="Configuração">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                </content>
             </Tab>
          </tabs>
       </TabPane>
-      <Pane prefHeight="42.0" prefWidth="400.0">
-         <Label fx:id="lblUsuario" layoutX="318.0" layoutY="10.0" text="Usuario" />
-         <Avatar fx:id="avatar1" layoutX="364.0" layoutY="1.0">
+      <Pane prefHeight="44.0" prefWidth="400.0">
+         <Label fx:id="lblUsuario" layoutX="309.0" layoutY="13.0" text="Usuario" />
+         <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
+         <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="356.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@image/Avatar-Mask.png" />
             </image>
-         </Avatar>
-         <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
+         </ImageView>
       </Pane>
    </children>
 </AnchorPane>
