@@ -23,24 +23,12 @@ import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
 
-    @FXML private AnchorPane paneContainerSalao;
-    @FXML private Tab tabHome, tabFeatures;
-    @FXML private Avatar avatar, avatar1;
-    @FXML private Label lblWellcomeName, lblUsuario;
-    @FXML private ComboBox<String> cmbSalaoHome, cmbSalaoBar;
-    @FXML private Button btnAdicionarSalao, btnEditarSalao, btnDeletarSalao, btnCancelarSalao, btnSalvarSalao;
-    @FXML private Pane paneSalao;
-    @FXML private TextField txfIdSalao, txfNomeSalao, txfCnpjSalao;
-
     public ArrayList<Usuario> usuarios = new ArrayList<>();
     public ArrayList<Salao> salaos = new ArrayList<>();
-    public ArrayList<Salao> salaosDUsuario = new ArrayList<>();
     public ArrayList<UsuarioSalao> usuarioSalaos = new ArrayList<>();
 
     public int ID;
-    public String Nome, Email;
-
-    public String Operacao;
+    public String Nome, Email, Senha;
 
     public int IDsalao;
 
@@ -55,6 +43,24 @@ public class MainScreenController implements Initializable {
         listInMemoryUser();
     }
 
+    public int idUsuario(){
+        for(Usuario usuario: usuarios) {
+            if (usuario.email.equals(Email) && usuario.usuario.equals(Nome)) {
+                Senha = usuario.getSenha();
+                return usuario.getID();
+            }
+        }
+        return 0;
+    }
+
+    void atualizaUsuario(){
+        lblUsuario.setText(Nome);
+        lblWellcomeName.setText("Bem vindo(a) " + Nome);
+
+        lblUsuarioConfig.setText(Nome);
+        lblEmailConfig.setText(Email);
+        lblSenhaConfig.setText(Senha);
+    }
 
     public void listInMemoryUser(){
 
@@ -63,19 +69,21 @@ public class MainScreenController implements Initializable {
         Email = MainScreenApp.Email;
         ID = idUsuario();
 
-        lblUsuario.setText(Nome);
-        lblWellcomeName.setText("Bem vindo(a) " + Nome);
+        atualizaUsuario();
     }
 
-    //Este codigo esta com um erro, é preciso inserir um atributo salão dentro de um usuario
-    public int idUsuario(){
-        for(Usuario usuario: usuarios) {
-            if (usuario.email.equals(Email) && usuario.usuario.equals(Nome)) {
-                return usuario.getID();
-            }
-        }
-        return 0;
-    }
+    @FXML private Tab tabHome, tabAgenda, tabFuncionarios,tabClientes, tabConfiguracao;
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Home
+    public String Operacao;
+
+    @FXML private AnchorPane paneContainerSalao;
+    @FXML private Pane paneSalao;
+    @FXML private Label lblWellcomeName, lblUsuario;
+    @FXML private ComboBox<String> cmbSalaoHome, cmbSalaoBar;
+    @FXML private Button btnAdicionarSalao, btnEditarSalao, btnDeletarSalao, btnCancelarSalao, btnSalvarSalao;
+    @FXML private TextField txfIdSalao, txfNomeSalao, txfCnpjSalao;
 
     public void habilitarCamposSalao(){
         btnEditarSalao.setDisable(true);
@@ -96,6 +104,26 @@ public class MainScreenController implements Initializable {
     public void LimparCamposSalao(){
         txfNomeSalao.clear();
         txfCnpjSalao.clear();
+    }
+
+    public void addCombSalao(){
+        cmbSalaoHome.getItems().clear();
+        cmbSalaoBar.getItems().clear();
+
+        if(!salaos.isEmpty()){
+            for (Salao salao: salaos){
+                cmbSalaoHome.getItems().add(salao.ID + ": " + salao.Nome);
+                cmbSalaoBar.getItems().add(salao.ID + ": " + salao.Nome);
+            }
+            tabAgenda.setDisable(false);
+            tabFuncionarios.setDisable(false);
+            tabClientes.setDisable(false);
+        }else{
+            tabAgenda.setDisable(true);
+            tabFuncionarios.setDisable(true);
+            tabClientes.setDisable(true);
+        }
+
     }
 
     public void addSalao() {
@@ -166,16 +194,6 @@ public class MainScreenController implements Initializable {
         }
     }
 
-    public void addCombSalao(){
-        cmbSalaoHome.getItems().clear();
-        cmbSalaoBar.getItems().clear();
-        
-      for (Salao salao: salaos){
-            cmbSalaoHome.getItems().add(salao.ID + ": " + salao.Nome);
-            cmbSalaoBar.getItems().add(salao.ID + ": " + salao.Nome);
-        }
-    }
-
     @FXML void btnAdicionarSalao_click(ActionEvent event) {
         logs("btnAdicionar ativado, line: 162");
         Operacao = "adicionar";
@@ -186,8 +204,7 @@ public class MainScreenController implements Initializable {
         habilitarCamposSalao();
     }
 
-    @FXML
-    void btnEditarSalao_click(ActionEvent event) {
+    @FXML void btnEditarSalao_click(ActionEvent event) {
         logs("btnEditar ativado");
         try {
             if(Salao.existSalao(salaos, cmbSalaoHome.getValue().toString())){
@@ -219,32 +236,132 @@ public class MainScreenController implements Initializable {
 
     }
 
-
-    @FXML
-    void btnDeletarSalao_click(ActionEvent event) {
+    @FXML void btnDeletarSalao_click(ActionEvent event) {
         deletarSalao();
     }
 
-    @FXML
-    void btnCancelarSalao_click(ActionEvent event) {
+    @FXML void btnCancelarSalao_click(ActionEvent event) {
         desabilitarCamposSalao();
         LimparCamposSalao();
     }
 
-    @FXML
-    void btnSalvarSalao_click(ActionEvent event) {
+    @FXML void btnSalvarSalao_click(ActionEvent event) {
         if(Operacao.equals("editar")){
             editarSalao();
         }else{
             addSalao();
         }
     }
+    //End: Home
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Agenda
+    //End: Agenda
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Funcionarios
+    //End: Funcionario
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Clientes
+    @FXML private Pane paneCliente;
+    @FXML private TextField txfNomeCliente, txfEmailCliente, txfCpfCliente, txfFoneCliente, txfEnderecoCliente, txfNumeroCliente,txfCepCliente;
+    @FXML private RadioButton radBhomem, radBmulher;
+    @FXML private Button btnPesquisarCliente, btnAdicionarCliente, btnCancelarCliente, btnConfirmarCliente;
+    @FXML private ToggleGroup groupGeneroCliente;
+
+    public void habilitarCamposCliente(){
+        paneCliente.setVisible(true);
+
+        btnPesquisarCliente.setVisible(false);
+        btnAdicionarCliente.setVisible(false);
+    }
+
+    public void desabilitarCamposCliente(){
+        paneCliente.setVisible(false);
+
+        btnPesquisarCliente.setVisible(true);
+        btnAdicionarCliente.setVisible(true);
+    }
+
+    public void LimparCamposCliente(){
+        txfNomeSalao.clear();
+        txfCnpjSalao.clear();
+    }
+
+    @FXML
+    void btnPesquisarCliente_click(ActionEvent event) {
+        habilitarCamposCliente();
+    }
+
+    @FXML
+    void btnAdicionarCliente_click(ActionEvent event) {
+        habilitarCamposCliente();
+    }
+
+    @FXML
+    void btnConfirmarCliente_click(ActionEvent event) {
+        desabilitarCamposCliente();
+    }
+
+    @FXML
+    void btnCancelarCliente_click(ActionEvent event) {
+        desabilitarCamposCliente();
+    }
+
+    //End: Clientes
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Configuração
+
+    @FXML private AnchorPane paneEditUsuario,paneSaveUsuario;
+
+    @FXML private Button btnEditUsuario, btnSalvarUsuario;
+
+    @FXML private TextField txfEmailConfig, txfSenhaConfig, txfUsuarioConfig;
+
+    @FXML private Label lblUsuarioConfig, lblEmailConfig, lblSenhaConfig;
+
+    @FXML
+    void btnEditUsuario_click(ActionEvent event) {
+        lblUsuarioConfig.setVisible(false);
+        lblEmailConfig.setVisible(false);
+        lblSenhaConfig.setVisible(false);
+
+        txfUsuarioConfig.setText(Nome);
+        txfEmailConfig.setText(Email);
+        txfSenhaConfig.setText(Senha);
+
+        paneSaveUsuario.setVisible(true);
+        paneEditUsuario.setVisible(false);
+    }
+
+    @FXML
+    void btnSalvarUsuario_click(ActionEvent event) {
+        lblUsuarioConfig.setVisible(true);
+        lblEmailConfig.setVisible(true);
+        lblSenhaConfig.setVisible(true);
+
+        Nome = txfUsuarioConfig.getText();
+        Email = txfEmailConfig.getText();
+        Senha = txfSenhaConfig.getText();
+
+        atualizaUsuario();
+
+        paneSaveUsuario.setVisible(false);
+        paneEditUsuario.setVisible(true);
+    }
+    //End: Configuração
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
     public void logs(String v){
         System.out.println(v);
     }
-
-
 
 }
