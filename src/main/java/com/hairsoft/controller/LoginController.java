@@ -18,12 +18,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
+
 
     public ArrayList<Usuario> usuarios = new ArrayList<>();
 
@@ -69,12 +68,12 @@ public class LoginController implements Initializable {
             if(nome.isEmpty()){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
             }else if (Usuario.equalUser(usuarios, nome)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterUserExists());
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageUserExists());
             }
             else if(Usuario.equalEmail(usuarios , email)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterEmailExists());
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageEmailExists());
             }else if(!Validation.isValidEmail(email)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterValidEmail());
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidEmail());
             }else if(!Validation.isValidSenha(senha)){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidPassword());
             }else{
@@ -104,7 +103,6 @@ public class LoginController implements Initializable {
                     return;
                 }
 
-
             }
             throw new IOException();
         } catch (IOException var4) {
@@ -118,9 +116,9 @@ public class LoginController implements Initializable {
         try{
 
             MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
-            System.out.println("Usuario call back line:121");
+            System.out.println("Usuario call back line:122");
             screenApp.start(new Stage());
-            System.out.println("Iniciando instancia line:123");
+            System.out.println("Iniciando instancia line:124");
         }catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
         }

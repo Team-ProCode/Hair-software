@@ -57,15 +57,15 @@ public class ErroDialog{
         return "Registro incorreto!";
     }
 
-    public String getMessageRegisterUserExists(){
+    public String getMessageUserExists(){
         return "Por favor insira um usuario valido!";
     }
 
-    public String getMessageRegisterEmailExists(){
+    public String getMessageEmailExists(){
         return "Ja existe um usuario usando este Email!!";
     }
 
-    public String getMessageRegisterValidEmail(){
+    public String getMessageValidEmail(){
         return "Insira um E-mail valido!!";
     }
 
