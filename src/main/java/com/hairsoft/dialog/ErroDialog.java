@@ -4,11 +4,11 @@ import javafx.scene.control.Alert;
 
 public class ErroDialog{
 
-    public static void alertDialog(String Title, String Messege){
+    public static void erroDialogAlert(String Title, String Message){
         Alert alert;
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(Title);
-        alert.setHeaderText(Messege);
+        alert.setHeaderText(Message);
         alert.showAndWait();
     }
 // MainScreen errors

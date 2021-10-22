@@ -5,9 +5,7 @@ import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.entity.UsuarioSalao;
 import com.hairsoft.hairsoft.MainScreenApp;
-import com.hairsoft.method.MainScreenMethod;
 
-import com.gluonhq.charm.glisten.control.Avatar;
 import com.hairsoft.method.ValidaCNPJ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +16,6 @@ import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
@@ -133,12 +130,11 @@ public class MainScreenController implements Initializable {
             String CNPJ = txfCnpjSalao.getText();
 
             if (nomeSalao.isEmpty()){
-                ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
+                ErroDialog.erroDialogAlert(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else if (CNPJ.isEmpty()){
-                ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
+                ErroDialog.erroDialogAlert(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else if (!ValidaCNPJ.isCNPJ(CNPJ) | Salao.cnpjExist(salaos, CNPJ)){
-                ErroDialog.alertDialog(dialog.getTitleErroCNPJ(), dialog.getMessageErroCNPJ());
-                txfCnpjSalao.clear();
+                ErroDialog.erroDialogAlert(dialog.getTitleErroCNPJ(), dialog.getMessageErroCNPJ());
             }
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
@@ -150,7 +146,7 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
+            ErroDialog.erroDialogAlert(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
     }
 
@@ -159,7 +155,7 @@ public class MainScreenController implements Initializable {
             int Id = Integer.parseInt(txfIdSalao.getText());
 
             if (txfNomeSalao.getText().equals("")){
-                ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
+                ErroDialog.erroDialogAlert(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else {
                 for (Salao salao: salaos){
                     if(salao.ID == Id){
@@ -173,7 +169,7 @@ public class MainScreenController implements Initializable {
             }
         }
         catch (Exception e){
-            ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
+            ErroDialog.erroDialogAlert(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
     }
 
@@ -190,7 +186,7 @@ public class MainScreenController implements Initializable {
 
         }
         catch (Exception e){
-            ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
+            ErroDialog.erroDialogAlert(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
     }
 
@@ -207,7 +203,7 @@ public class MainScreenController implements Initializable {
     @FXML void btnEditarSalao_click(ActionEvent event) {
         logs("btnEditar ativado");
         try {
-            if(Salao.existSalao(salaos, cmbSalaoHome.getValue().toString())){
+            if(Salao.existSalao(salaos, cmbSalaoHome.getValue())){
 
                 logs("Passou na condição IF do botão, line 180");
                 Operacao = "editar";
@@ -220,7 +216,7 @@ public class MainScreenController implements Initializable {
 
                 txfIdSalao.setText(Integer.toString(Salao.gerarId(salaos)));
 
-                Salao salao = Salao.buscaSalao(salaos, cmbSalaoHome.getValue().toString());
+                Salao salao = Salao.buscaSalao(salaos, cmbSalaoHome.getValue());
 
                 txfIdSalao.setText(salao.ID.toString());
                 txfNomeSalao.setText(salao.getNome());
@@ -228,10 +224,10 @@ public class MainScreenController implements Initializable {
                 txfCnpjSalao.setDisable(true);
             }
             else{
-                ErroDialog.alertDialog("Advertencia", "Não foi possivel achar o salão");
+                ErroDialog.erroDialogAlert("Advertencia", "Não foi possivel achar o salão");
             }
         }catch (Exception e){
-            ErroDialog.alertDialog("Advertencia", "Não foi possivel achar o salão, selecione algo");
+            ErroDialog.erroDialogAlert("Advertencia", "Não foi possivel achar o salão, selecione algo");
         }
 
     }

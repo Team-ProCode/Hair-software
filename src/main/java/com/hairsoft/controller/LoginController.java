@@ -10,6 +10,7 @@ import com.hairsoft.method.Validation;
 import com.hairsoft.entity.Usuario;
 import com.hairsoft.hairsoft.LoginApp;
 import com.hairsoft.hairsoft.MainScreenApp;
+import com.hairsoft.Connections.MongodbConnection;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +31,6 @@ public class LoginController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb){
         usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
-
     }
 
 	//public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -66,22 +66,22 @@ public class LoginController implements Initializable {
             senha = txfRegSenha.getText();
 
             if(nome.isEmpty()){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
+                ErroDialog.erroDialogAlert(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
             }else if (Usuario.equalUser(usuarios, nome)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageUserExists());
+                ErroDialog.erroDialogAlert(dialog.getTitleRegisterWrong(), dialog.getMessageUserExists());
             }
             else if(Usuario.equalEmail(usuarios , email)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageEmailExists());
+                ErroDialog.erroDialogAlert(dialog.getTitleRegisterWrong(), dialog.getMessageEmailExists());
             }else if(!Validation.isValidEmail(email)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidEmail());
+                ErroDialog.erroDialogAlert(dialog.getTitleRegisterWrong(), dialog.getMessageValidEmail());
             }else if(!Validation.isValidSenha(senha)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidPassword());
+                ErroDialog.erroDialogAlert(dialog.getTitleRegisterWrong(), dialog.getMessageValidPassword());
             }else{
                 usuarios.add(new Usuario(Usuario.gerarId(usuarios),nome, email, senha ));
                 register_off();
             }
         }catch(Exception e){
-            ErroDialog.alertDialog(dialog.getTitleErroGenericReg(), dialog.getMessageErroGenericReg());
+            ErroDialog.erroDialogAlert(dialog.getTitleErroGenericReg(), dialog.getMessageErroGenericReg());
         }
     }
 
@@ -106,7 +106,7 @@ public class LoginController implements Initializable {
             }
             throw new IOException();
         } catch (IOException var4) {
-            ErroDialog.alertDialog(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
+            ErroDialog.erroDialogAlert(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
         }
     }
 
@@ -120,7 +120,7 @@ public class LoginController implements Initializable {
             screenApp.start(new Stage());
             System.out.println("Iniciando instancia line:124");
         }catch (Exception e){
-            ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
+            ErroDialog.erroDialogAlert(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());
         }
     }
 
