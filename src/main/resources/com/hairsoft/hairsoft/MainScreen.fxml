@@ -45,300 +45,287 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Box?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hairsoft.controller.MainScreenController">
-   <children>
-      <TabPane layoutY="42.0" prefHeight="558.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab fx:id="tabHome" text="Home">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane layoutX="33.0" layoutY="28.0" prefHeight="71.0" prefWidth="333.0">
-                           <children>
-                              <Box depth="100" drawMode="LINE" height="80.0" layoutX="166.0" layoutY="37.0" width="350.0" />
-                              <Label fx:id="lblWellcomeName" layoutX="94.0" layoutY="25.0" text="Bem Vindo(a)">
-                                 <font>
-                                    <Font name="Bodoni MT" size="22.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/Avatar-Mask.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="30.0" layoutY="128.0" prefHeight="48.0" prefWidth="339.0">
-                           <children>
-                              <ComboBox fx:id="cmbSalaoHome" layoutX="6.0" layoutY="5.0" prefHeight="36.0" prefWidth="199.0" />
-                              <Button fx:id="btnAdicionarSalao" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnAdicionarSalao_click" prefHeight="36.0" prefWidth="64.0" text="Adicionar" />
-                              <Button fx:id="btnEditarSalao" layoutX="269.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnEditarSalao_click" prefHeight="36.0" prefWidth="64.0" text="Editar..." />
-                           </children></Pane>
-                        <AnchorPane fx:id="paneContainerSalao" layoutX="11.0" layoutY="178.0" prefHeight="129.0" prefWidth="379.0" visible="false">
-                           <children>
-                              <Pane fx:id="paneSalao" layoutX="15.0" prefHeight="119.0" prefWidth="350.0">
-                                 <children>
-                                    <Label layoutX="18.0" layoutY="11.0" text="ID:" textFill="#868686" />
-                                    <Label layoutX="17.0" layoutY="47.0" text="Nome:" />
-                                    <Label layoutX="17.0" layoutY="81.0" text="Cnpj:" />
-                                    <TextField fx:id="txfIdSalao" layoutX="38.0" layoutY="9.0" prefHeight="26.0" prefWidth="173.0" />
-                                    <TextField fx:id="txfNomeSalao" layoutX="60.0" layoutY="44.0" prefHeight="26.0" prefWidth="152.0" promptText="Nome do estabelecimento" />
-                                    <TextField fx:id="txfCnpjSalao" layoutX="50.0" layoutY="79.0" prefHeight="26.0" prefWidth="162.0" promptText="CNPJ" />
-                                    <Button fx:id="btnDeletarSalao" layoutX="219.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnDeletarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Deletar" />
-                                    <Button fx:id="btnCancelarSalao" layoutX="219.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnCancelarSalao_click" prefHeight="36.0" prefWidth="117.0" text="Cancelar" />
-                                    <Button fx:id="btnSalvarSalao" layoutX="219.0" layoutY="79.0" mnemonicParsing="false" onAction="#btnSalvarSalao_click" prefHeight="37.0" prefWidth="117.0" text="Salvar" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tabAgenda" disable="true" text="Agenda">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab fx:id="tabFuncionarios" disable="true" text="Funcionarios">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane fx:id="paneCliente1" layoutX="-4.0" layoutY="11.0" prefHeight="530.0" prefWidth="408.0">
-                           <children>
-                              <TextField fx:id="txfNomeCliente1" alignment="CENTER" layoutX="47.0" layoutY="66.0" prefHeight="36.0" prefWidth="314.0" promptText="Nome e sobrenome">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <RadioButton fx:id="radBhomem1" layoutX="103.0" layoutY="317.0" mnemonicParsing="false" text="Homem">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="groupGeneroCliente1" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="radBmulher1" layoutX="212.0" layoutY="318.0" mnemonicParsing="false" text="Mulher" toggleGroup="$groupGeneroCliente1">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </RadioButton>
-                              <TextField fx:id="txfEmailCliente1" alignment="CENTER" layoutX="47.0" layoutY="114.0" prefHeight="36.0" prefWidth="314.0" promptText="Email">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfCpfCliente1" alignment="CENTER" layoutX="47.0" layoutY="162.0" prefHeight="36.0" prefWidth="314.0" promptText="CPF">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfFoneCliente1" alignment="CENTER" layoutX="47.0" layoutY="212.0" prefHeight="39.0" prefWidth="165.0" promptText="Fone">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfEnderecoCliente1" alignment="CENTER" layoutX="47.0" layoutY="259.0" prefHeight="39.0" prefWidth="232.0" promptText="Endereço">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfNumeroCliente1" alignment="CENTER" layoutX="288.0" layoutY="259.0" prefHeight="39.0" prefWidth="72.0" promptText="Nº">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfCepCliente1" alignment="CENTER" layoutX="220.0" layoutY="212.0" prefHeight="39.0" prefWidth="141.0" promptText="Cep">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Label layoutX="69.0" layoutY="8.0" text="Cadastrar Funcionarios">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="btnCancelarCliente1" layoutX="7.0" layoutY="464.0" mnemonicParsing="false" onAction="#btnCancelarCliente_click" prefHeight="51.0" prefWidth="195.0" text="Cancel">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="btnConfirmarCliente1" layoutX="206.0" layoutY="464.0" mnemonicParsing="false" onAction="#btnConfirmarCliente_click" prefHeight="51.0" prefWidth="195.0" text="Confirm">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tabClientes" closable="false" disable="true" text="Clientes">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane fx:id="paneCliente" layoutX="-4.0" layoutY="18.0" prefHeight="520.0" prefWidth="408.0" visible="false">
-                           <children>
-                              <TextField fx:id="txfNomeCliente" alignment="CENTER" layoutX="49.0" layoutY="84.0" prefHeight="36.0" prefWidth="314.0" promptText="Nome e sobrenome">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></TextField>
-                              <RadioButton fx:id="radBhomem" layoutX="102.0" layoutY="387.0" mnemonicParsing="false" text="Homem">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="groupGeneroCliente" />
-                                 </toggleGroup></RadioButton>
-                              <RadioButton fx:id="radBmulher" layoutX="216.0" layoutY="388.0" mnemonicParsing="false" text="Mulher" toggleGroup="$groupGeneroCliente">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></RadioButton>
-                              <TextField fx:id="txfEmailCliente" alignment="CENTER" layoutX="49.0" layoutY="132.0" prefHeight="36.0" prefWidth="314.0" promptText="Email">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfCpfCliente" alignment="CENTER" layoutX="49.0" layoutY="180.0" prefHeight="36.0" prefWidth="314.0" promptText="CPF">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfFoneCliente" alignment="CENTER" layoutX="49.0" layoutY="279.0" prefHeight="39.0" prefWidth="165.0" promptText="Fone">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <Button fx:id="btnCancelarCliente" layoutX="7.0" layoutY="458.0" mnemonicParsing="false" onAction="#btnCancelarCliente_click" prefHeight="51.0" prefWidth="195.0" text="Cancel">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="btnConfirmarCliente" layoutX="206.0" layoutY="458.0" mnemonicParsing="false" onAction="#btnConfirmarCliente_click" prefHeight="51.0" prefWidth="195.0" text="Confirm">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Button>
-                              <TextField fx:id="txfEnderecoCliente" alignment="CENTER" layoutX="49.0" layoutY="332.0" prefHeight="39.0" prefWidth="232.0" promptText="Endereço">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfNumeroCliente" alignment="CENTER" layoutX="286.0" layoutY="332.0" prefHeight="39.0" prefWidth="77.0" promptText="Nº">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="txfCepCliente" alignment="CENTER" layoutX="223.0" layoutY="279.0" prefHeight="39.0" prefWidth="141.0" promptText="Cep">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </TextField>
-                              <ComboBox layoutX="48.0" layoutY="231.0" prefHeight="36.0" prefWidth="183.0" promptText="Municipio" />
-                              <ComboBox layoutX="239.0" layoutY="231.0" prefHeight="36.0" prefWidth="125.0" promptText="Estado" />
-                              <Label layoutX="103.0" layoutY="14.0" text="Cadastrar Cliente">
-                                 <font>
-                                    <Font size="32.0" />
-                                 </font>
-                              </Label>
-                           </children></AnchorPane>
-                        <Button fx:id="btnPesquisarCliente" layoutX="54.0" layoutY="239.0" mnemonicParsing="false" onAction="#btnPesquisarCliente_click" prefHeight="51.0" prefWidth="292.0" text="Pesquisar">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btnAdicionarCliente" layoutX="54.0" layoutY="174.0" mnemonicParsing="false" onAction="#btnAdicionarCliente_click" prefHeight="51.0" prefWidth="292.0" text="Adicionar">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Button>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="tabConfiguracao" closable="false" text="Configuração">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="370.0">
-                           <children>
-                              <AnchorPane fx:id="paneEditUsuario" layoutX="280.0" layoutY="167.0" prefHeight="26.0" prefWidth="85.0">
-                                 <children>
-                                    <Button fx:id="btnEditUsuario" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnEditUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Editar" textFill="#4582bf" />
-                                    <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@image/Edit-User.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane fx:id="paneSaveUsuario" layoutX="3.0" layoutY="4.0" prefHeight="192.0" prefWidth="365.0" visible="false">
-                                 <children>
-                                    <TextField fx:id="txfEmailConfig" layoutX="84.0" layoutY="97.0" prefHeight="26.0" prefWidth="141.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <PasswordField fx:id="txfSenhaConfig" layoutX="84.0" layoutY="138.0" prefHeight="30.0" prefWidth="140.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </PasswordField>
-                                    <TextField fx:id="txfUsuarioConfig" layoutX="84.0" layoutY="34.0" prefHeight="26.0" prefWidth="141.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </TextField>
-                                    <AnchorPane layoutX="277.0" layoutY="163.0" prefHeight="26.0" prefWidth="85.0">
-                                       <children>
-                                          <Button fx:id="btnSalvarUsuario" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnSalvarUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Salvar" textFill="#4582bf" />
-                                          <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@image/Save-Button.png" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="11.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/Avatar-Mask.png" />
-                                 </image>
-                              </ImageView>
-                              <Label fx:id="lblUsuarioConfig" layoutX="91.0" layoutY="33.0" text="Usuario" underline="true">
-                                 <font>
-                                    <Font size="31.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblEmailConfig" layoutX="95.0" layoutY="99.0" text="null" underline="true">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblSenhaConfig" layoutX="95.0" layoutY="138.0" text="null" underline="true">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-      <Pane prefHeight="44.0" prefWidth="400.0">
-         <Label fx:id="lblUsuario" layoutX="309.0" layoutY="13.0" text="Usuario" />
-         <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
-         <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="356.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-            <image>
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hairsoft.controller.MainScreenController">
+   <TabPane layoutY="42.0" prefHeight="558.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+      <Tab fx:id="tabHome" text="Home">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Pane layoutX="33.0" layoutY="28.0" prefHeight="71.0" prefWidth="333.0">
+               <Box depth="100" drawMode="LINE" height="80.0" layoutX="166.0" layoutY="37.0" width="350.0" />
+               <Label fx:id="lblWellcomeName" layoutX="94.0" layoutY="25.0" text="Bem Vindo(a)">
+                  <font>
+                     <Font name="Bodoni MT" size="22.0" />
+                  </font>
+               </Label>
+               <ImageView fitHeight="53.0" fitWidth="53.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@image/Avatar-Mask.png" />
+               </ImageView>
+            </Pane>
+            <Button fx:id="btnTesteBanco" layoutX="54.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnTesteBanco_click" prefHeight="69.0" prefWidth="270.0" text="Teste Banco" />
+         </AnchorPane>
+      </Tab>
+      <Tab fx:id="tabAgenda" disable="true" text="Agenda">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </Tab>
+      <Tab fx:id="tabFuncionarios" text="Funcionarios">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane fx:id="paneFuncionario" layoutX="-4.0" layoutY="11.0" prefHeight="530.0" prefWidth="408.0">
+               <TextField fx:id="txfNomeFuncionario" alignment="CENTER" layoutX="47.0" layoutY="66.0" prefHeight="36.0" prefWidth="314.0" promptText="Nome e sobrenome">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <RadioButton fx:id="radBhomemFuncionario" layoutX="103.0" layoutY="317.0" mnemonicParsing="false" text="Homem">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <toggleGroup>
+                     <ToggleGroup fx:id="groupGeneroFuncionario" />
+                  </toggleGroup>
+               </RadioButton>
+               <RadioButton fx:id="radBmulherFuncionario" layoutX="212.0" layoutY="318.0" mnemonicParsing="false" text="Mulher" toggleGroup="$groupGeneroFuncionario">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </RadioButton>
+               <TextField fx:id="txfEmailFuncionario" alignment="CENTER" layoutX="47.0" layoutY="114.0" prefHeight="36.0" prefWidth="314.0" promptText="Email">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfCpfFuncionario" alignment="CENTER" layoutX="47.0" layoutY="162.0" prefHeight="36.0" prefWidth="314.0" promptText="CPF">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfFoneFuncionario" alignment="CENTER" layoutX="47.0" layoutY="212.0" prefHeight="39.0" prefWidth="165.0" promptText="Fone">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfEnderecoFuncionario" alignment="CENTER" layoutX="47.0" layoutY="259.0" prefHeight="39.0" prefWidth="232.0" promptText="Endereço">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfNumeroFuncionario" alignment="CENTER" layoutX="288.0" layoutY="259.0" prefHeight="39.0" prefWidth="72.0" promptText="Nº">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfCepFuncionario" alignment="CENTER" layoutX="220.0" layoutY="212.0" prefHeight="39.0" prefWidth="141.0" promptText="Cep">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <Label layoutX="69.0" layoutY="8.0" text="Cadastrar Funcionarios">
+                  <font>
+                     <Font size="26.0" />
+                  </font>
+               </Label>
+               <Button fx:id="btnCancelarFuncionario" layoutX="7.0" layoutY="464.0" mnemonicParsing="false" onAction="#btnCancelarFuncionario_click" prefHeight="51.0" prefWidth="195.0" text="Cancel">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Button>
+               <Button fx:id="btnConfirmarFuncionario" layoutX="206.0" layoutY="464.0" mnemonicParsing="false" onAction="#btnConfirmarFuncionario_click" prefHeight="51.0" prefWidth="195.0" text="Confirm">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Button>
+            </AnchorPane>
+         </AnchorPane>
+      </Tab>
+      <Tab fx:id="tabClientes" closable="false" disable="true" text="Clientes">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane fx:id="paneCliente" layoutX="-4.0" layoutY="18.0" prefHeight="520.0" prefWidth="408.0" visible="false">
+               <TextField fx:id="txfNomeCliente" alignment="CENTER" layoutX="49.0" layoutY="84.0" prefHeight="36.0" prefWidth="314.0" promptText="Nome e sobrenome">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <RadioButton fx:id="radBhomem" layoutX="102.0" layoutY="387.0" mnemonicParsing="false" text="Homem">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <toggleGroup>
+                     <ToggleGroup fx:id="groupGeneroCliente" />
+                  </toggleGroup>
+               </RadioButton>
+               <RadioButton fx:id="radBmulher" layoutX="216.0" layoutY="388.0" mnemonicParsing="false" text="Mulher" toggleGroup="$groupGeneroCliente">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </RadioButton>
+               <TextField fx:id="txfEmailCliente" alignment="CENTER" layoutX="49.0" layoutY="132.0" prefHeight="36.0" prefWidth="314.0" promptText="Email">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfCpfCliente" alignment="CENTER" layoutX="49.0" layoutY="180.0" prefHeight="36.0" prefWidth="314.0" promptText="CPF">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfFoneCliente" alignment="CENTER" layoutX="49.0" layoutY="279.0" prefHeight="39.0" prefWidth="165.0" promptText="Fone">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <Button fx:id="btnCancelarCliente" layoutX="7.0" layoutY="458.0" mnemonicParsing="false" onAction="#btnCancelarCliente_click" prefHeight="51.0" prefWidth="195.0" text="Cancel">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Button>
+               <Button fx:id="btnConfirmarCliente" layoutX="206.0" layoutY="458.0" mnemonicParsing="false" onAction="#btnConfirmarCliente_click" prefHeight="51.0" prefWidth="195.0" text="Confirm">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Button>
+               <TextField fx:id="txfEnderecoCliente" alignment="CENTER" layoutX="49.0" layoutY="332.0" prefHeight="39.0" prefWidth="232.0" promptText="Endereço">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfNumeroCliente" alignment="CENTER" layoutX="286.0" layoutY="332.0" prefHeight="39.0" prefWidth="77.0" promptText="Nº">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="txfCepCliente" alignment="CENTER" layoutX="223.0" layoutY="279.0" prefHeight="39.0" prefWidth="141.0" promptText="Cep">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </TextField>
+               <ComboBox layoutX="48.0" layoutY="231.0" prefHeight="36.0" prefWidth="183.0" promptText="Municipio" />
+               <ComboBox layoutX="239.0" layoutY="231.0" prefHeight="36.0" prefWidth="125.0" promptText="Estado" />
+               <Label layoutX="103.0" layoutY="14.0" text="Cadastrar Cliente">
+                  <font>
+                     <Font size="32.0" />
+                  </font>
+               </Label>
+            </AnchorPane>
+            <Button fx:id="btnPesquisarCliente" layoutX="54.0" layoutY="239.0" mnemonicParsing="false" onAction="#btnPesquisarCliente_click" prefHeight="51.0" prefWidth="292.0" text="Pesquisar">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAdicionarCliente" layoutX="54.0" layoutY="174.0" mnemonicParsing="false" onAction="#btnAdicionarCliente_click" prefHeight="51.0" prefWidth="292.0" text="Adicionar">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </AnchorPane>
+      </Tab>
+      <Tab fx:id="tabConfiguracao" closable="false" text="Configuração">
+         <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <ImageView fitHeight="97.0" fitWidth="100.0" layoutX="284.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@image/Avatar-Mask.png" />
-            </image>
-         </ImageView>
-      </Pane>
-   </children>
+            </ImageView>
+            <Label layoutX="29.0" layoutY="35.0" text="Configurações gerais de Conta">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="98.0" text="Usuario" />
+            <Label layoutX="29.0" layoutY="164.0" text="Email" />
+            <TextField fx:id="txfUsuarioConfig" layoutX="21.0" layoutY="115.0" prefHeight="39.0" prefWidth="183.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txfEmailConfig" layoutX="22.0" layoutY="178.0" prefHeight="30.0" prefWidth="183.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="29.0" layoutY="222.0" text="Senha" />
+            <PasswordField fx:id="txfSenhaConfig" layoutX="23.0" layoutY="239.0" prefHeight="30.0" prefWidth="181.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <AnchorPane fx:id="paneEditUsuario" layoutX="272.0" layoutY="209.0" prefHeight="26.0" prefWidth="85.0">
+               <Button fx:id="btnEditUsuario" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnEditUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Editar" textFill="#4582bf" />
+               <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@image/Edit-User.png" />
+               </ImageView>
+            </AnchorPane>
+            <AnchorPane layoutX="255.0" layoutY="233.0" prefHeight="26.0" prefWidth="85.0">
+               <Button fx:id="btnSalvarUsuario" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnSalvarUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Salvar" textFill="#4582bf" />
+               <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@image/Save-Button.png" />
+               </ImageView>
+            </AnchorPane>
+            <AnchorPane fx:id="paneContainerSalao" layoutX="11.0" layoutY="335.0" prefHeight="101.0" prefWidth="390.0">
+               <Pane fx:id="paneSalao" layoutX="-10.0" layoutY="-2.0" prefHeight="114.0" prefWidth="400.0" visible="false">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="109.0" layoutX="12.0" layoutY="3.0" strokeType="INSIDE" width="380.0">
+                     <stroke>
+                        <LinearGradient endX="0.3476190476190476" endY="1.0" startX="0.3142857142857143" startY="0.7857142857142857">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.09941520541906357" green="0.07456140220165253" blue="0.44736841320991516" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.007662835249042145">
+                                 <color>
+                                    <Color red="0.09941520541906357" green="0.07456140220165253" blue="0.44736841320991516" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </stroke>
+                     <fill>
+                        <LinearGradient endX="0.23333333333333334" endY="0.09047619047619043" startX="1.0" startY="0.9428571428571428">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.16447368264198303" green="0.464802622795105" blue="0.7105262875556946" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
+                  <TextField fx:id="txfIdSalao" layoutX="19.0" layoutY="42.0" prefHeight="26.0" prefWidth="59.0" />
+                  <TextField fx:id="txfNomeSalao" layoutX="80.0" layoutY="42.0" prefHeight="26.0" prefWidth="152.0" promptText="Nome do estabelecimento" />
+                  <TextField fx:id="txfCnpjSalao" layoutX="19.0" layoutY="72.0" prefHeight="26.0" prefWidth="213.0" promptText="CNPJ" />
+                  <Button fx:id="btnDeletarSalao" layoutX="316.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnDeletarSalao_click" prefHeight="17.0" prefWidth="70.0" text="Deletar" />
+                  <Button fx:id="btnCancelarSalao" layoutX="241.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnCancelarSalao_click" prefHeight="17.0" prefWidth="70.0" text="Cancelar" />
+                  <Button fx:id="btnSalvarSalao" layoutX="279.0" layoutY="72.0" mnemonicParsing="false" onAction="#btnSalvarSalao_click" prefHeight="26.0" prefWidth="68.0" text="Salvar" />
+                  <Label layoutX="61.0" layoutY="14.0" prefHeight="17.0" prefWidth="125.0" text="Gerenciador de salão" textFill="#3144d3" />
+               </Pane>
+            </AnchorPane>
+            <Pane layoutX="16.0" layoutY="287.0" prefHeight="48.0" prefWidth="339.0">
+               <ComboBox fx:id="cmbSalaoHome" layoutX="6.0" layoutY="5.0" prefHeight="36.0" prefWidth="199.0" />
+               <Button fx:id="btnAdicionarSalao" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnAdicionarSalao_click" prefHeight="36.0" prefWidth="64.0" text="Adicionar" />
+               <Button fx:id="btnEditarSalao" layoutX="269.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnEditarSalao_click" prefHeight="36.0" prefWidth="64.0" text="Editar..." />
+            </Pane>
+         </AnchorPane>
+      </Tab>
+   </TabPane>
+   <Pane prefHeight="44.0" prefWidth="400.0">
+      <Label fx:id="lblUsuario" layoutX="309.0" layoutY="13.0" text="Usuario" />
+      <ComboBox fx:id="cmbSalaoBar" editable="true" layoutX="1.0" layoutY="6.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.37" prefHeight="26.0" prefWidth="152.0" promptText="-select-" />
+      <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="356.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@image/Avatar-Mask.png" />
+      </ImageView>
+   </Pane>
 </AnchorPane>

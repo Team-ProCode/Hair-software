@@ -1,8 +1,8 @@
 package com.hairsoft.hairsoft;
 
-import com.hairsoft.entity.Clientes;
-import com.hairsoft.entity.Colaboradores;
-import com.hairsoft.entity.Salao;
+//import com.hairsoft.entity.Clientes;
+//import com.hairsoft.entity.Colaboradores;
+//import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,23 +10,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainScreenApp extends Application {
 
     private static Stage stage;
 
-    public static ArrayList<Usuario> usuarios = new ArrayList<>();
+    public static Usuario usuarios = new Usuario();
     //public static ArrayList<Salao> salaos = new ArrayList<>();
     //public static ArrayList<Colaboradores> colaboradores = new ArrayList<>();
     //public static ArrayList<Clientes> clientes = new ArrayList<>();
 
-    public static String Nome, Email;
+    public static void usuariosCall(Usuario usuarioLogado){
+        MainScreenApp.usuarios = usuarioLogado;
+    }
 
-    public static void usuariosCallBack(ArrayList<Usuario> user, String nome, String email){
-        usuarios.addAll(user);
-        Nome = nome;
-        Email = email;
+    public static Usuario usuariosBack(){
+        return usuarios;
     }
 
     @Override

@@ -18,8 +18,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -93,18 +91,12 @@ public class LoginController implements Initializable {
             userOrEmail = txfEmail.getText();
             senha = txfSenha.getText();
 
-            for(Usuario usuario: usuarios) {
-              
-                if (usuario.usuario.equals(userOrEmail) | usuario.email.equals(userOrEmail) && usuario.senha.equals(senha)) {
-                    System.out.println("Encontrou usuario line:99");
-                    callScreen(usuario.email, usuario.usuario);
-                    System.out.println("Chamou metodo line:101");
-                    LoginApp.getStage().close();
-                    System.out.println("Fechou tela de login line:103");
-                    return;
-                }
-
-
+            if(Usuario.login(usuarios, userOrEmail, senha)){
+                callScreen(userOrEmail);
+                LoginApp.getStage().close();
+                return;
+            }else{
+                ErroDialog.alertDialog(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
             }
             throw new IOException();
         } catch (IOException var4) {
@@ -112,14 +104,14 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void callScreen(String Email, String Nome){
+    public void callScreen(String userOrEmail){
         MainScreenApp screenApp = new MainScreenApp();
-        System.out.println("Intancia Main Screen line:117");
+        System.out.println("Instancia Main Screen line:117");
         try{
-
-            MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
+            MainScreenApp.usuariosCall(Usuario.returnUser(usuarios, userOrEmail));
             System.out.println("Usuario call back line:121");
-            screenApp.start(new Stage());
+            Stage stage = new Stage();
+            screenApp.start(stage);
             System.out.println("Iniciando instancia line:123");
         }catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());

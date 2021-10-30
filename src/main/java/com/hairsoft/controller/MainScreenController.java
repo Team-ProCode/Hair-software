@@ -1,5 +1,6 @@
 package com.hairsoft.controller;
 
+import com.hairsoft.Connections.MongodbConnection;
 import com.hairsoft.dialog.ErroDialog;
 import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
@@ -23,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
 
-    public ArrayList<Usuario> usuarios = new ArrayList<>();
+    public static Usuario usuario = new Usuario();
     public ArrayList<Salao> salaos = new ArrayList<>();
     public ArrayList<UsuarioSalao> usuarioSalaos = new ArrayList<>();
 
@@ -43,14 +44,17 @@ public class MainScreenController implements Initializable {
         listInMemoryUser();
     }
 
-    public int idUsuario(){
-        for(Usuario usuario: usuarios) {
-            if (usuario.email.equals(Email) && usuario.usuario.equals(Nome)) {
-                Senha = usuario.getSenha();
-                return usuario.getID();
-            }
-        }
-        return 0;
+    public void listInMemoryUser(){
+
+        logs("Linha 49 erro");
+        usuario = MainScreenApp.usuarios;
+
+        logs("Linha 52 erro");
+        Nome = usuario.getUsuario();
+        Email = usuario.getEmail();
+        ID = usuario.getID();
+
+        atualizaUsuario();
     }
 
     void atualizaUsuario(){
@@ -62,16 +66,6 @@ public class MainScreenController implements Initializable {
         lblSenhaConfig.setText(Senha);
     }
 
-    public void listInMemoryUser(){
-
-        usuarios = MainScreenApp.usuarios;
-        Nome = MainScreenApp.Nome;
-        Email = MainScreenApp.Email;
-        ID = idUsuario();
-
-        atualizaUsuario();
-    }
-
     @FXML private Tab tabHome, tabAgenda, tabFuncionarios,tabClientes, tabConfiguracao;
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,9 +75,103 @@ public class MainScreenController implements Initializable {
     @FXML private AnchorPane paneContainerSalao;
     @FXML private Pane paneSalao;
     @FXML private Label lblWellcomeName, lblUsuario;
+
+
+
+    //End: Home
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Agenda
+    //End: Agenda
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Funcionarios
+    @FXML
+    private AnchorPane paneFuncionario;
+
+    @FXML private TextField txfNomeFuncionario;
+    @FXML private ToggleGroup groupGeneroFuncionario;
+    @FXML private RadioButton radBhomemFuncionario, radBmulherFuncionario;
+    @FXML private TextField txfEmailFuncionario, txfCpfFuncionario, txfFoneFuncionario, txfEnderecoFuncionario, txfNumeroFuncionario, txfCepFuncionario;
+    @FXML private Button btnConfirmarFuncionario, btnCancelarFuncionario;
+
+
+    @FXML
+    void btnConfirmarFuncionario_click(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnCancelarFuncionario_click(ActionEvent event) {
+
+    }
+    //End: Funcionario
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Clientes
+    @FXML private Pane paneCliente;
+    @FXML private TextField txfNomeCliente, txfEmailCliente, txfCpfCliente, txfFoneCliente, txfEnderecoCliente, txfNumeroCliente,txfCepCliente;
+    @FXML private RadioButton radBhomem, radBmulher;
+    @FXML private Button btnPesquisarCliente, btnAdicionarCliente, btnCancelarCliente, btnConfirmarCliente;
+    @FXML private ToggleGroup groupGeneroCliente;
+
+    public void habilitarCamposCliente(){
+        paneCliente.setVisible(true);
+
+        btnPesquisarCliente.setVisible(false);
+        btnAdicionarCliente.setVisible(false);
+    }
+
+    public void desabilitarCamposCliente(){
+        paneCliente.setVisible(false);
+
+        btnPesquisarCliente.setVisible(true);
+        btnAdicionarCliente.setVisible(true);
+    }
+
+    public void LimparCamposCliente(){
+        txfNomeSalao.clear();
+        txfCnpjSalao.clear();
+    }
+
+    @FXML
+    void btnPesquisarCliente_click(ActionEvent event) {
+        habilitarCamposCliente();
+    }
+
+    @FXML
+    void btnAdicionarCliente_click(ActionEvent event) {
+        habilitarCamposCliente();
+    }
+
+    @FXML
+    void btnConfirmarCliente_click(ActionEvent event) {
+        desabilitarCamposCliente();
+    }
+
+    @FXML
+    void btnCancelarCliente_click(ActionEvent event) {
+        desabilitarCamposCliente();
+    }
+
+    //End: Clientes
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Start: Configuração
+
+    @FXML private AnchorPane paneEditUsuario,paneSaveUsuario;
+    @FXML private Button btnEditUsuario, btnSalvarUsuario;
+    @FXML private TextField txfEmailConfig, txfSenhaConfig, txfUsuarioConfig;
+    @FXML private Label lblUsuarioConfig, lblEmailConfig, lblSenhaConfig;
+
     @FXML private ComboBox<String> cmbSalaoHome, cmbSalaoBar;
-    @FXML private Button btnAdicionarSalao, btnEditarSalao, btnDeletarSalao, btnCancelarSalao, btnSalvarSalao;
+    @FXML private Button btnAdicionarSalao, btnEditarSalao, btnDeletarSalao, btnCancelarSalao, btnSalvarSalao, btnTesteBanco;
     @FXML private TextField txfIdSalao, txfNomeSalao, txfCnpjSalao;
+
 
     public void habilitarCamposSalao(){
         btnEditarSalao.setDisable(true);
@@ -142,7 +230,7 @@ public class MainScreenController implements Initializable {
             }
             else {
                 salaos.add(new Salao(Id, nomeSalao ,CNPJ));
-                usuarioSalaos.add(new UsuarioSalao(idUsuario(), Id));
+                usuarioSalaos.add(new UsuarioSalao(ID, Id));
 
                 addCombSalao();
                 LimparCamposSalao();
@@ -192,6 +280,34 @@ public class MainScreenController implements Initializable {
         catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroSys(),dialog.getMensageErroSys());
         }
+    }
+
+    @FXML void btnEditUsuario_click(ActionEvent event) {
+        lblUsuarioConfig.setVisible(false);
+        lblEmailConfig.setVisible(false);
+        lblSenhaConfig.setVisible(false);
+
+        txfUsuarioConfig.setText(Nome);
+        txfEmailConfig.setText(Email);
+        txfSenhaConfig.setText(Senha);
+
+        paneSaveUsuario.setVisible(true);
+        paneEditUsuario.setVisible(false);
+    }
+
+    @FXML void btnSalvarUsuario_click(ActionEvent event) {
+        lblUsuarioConfig.setVisible(true);
+        lblEmailConfig.setVisible(true);
+        lblSenhaConfig.setVisible(true);
+
+        Nome = txfUsuarioConfig.getText();
+        Email = txfEmailConfig.getText();
+        Senha = txfSenhaConfig.getText();
+
+        atualizaUsuario();
+
+        paneSaveUsuario.setVisible(false);
+        paneEditUsuario.setVisible(true);
     }
 
     @FXML void btnAdicionarSalao_click(ActionEvent event) {
@@ -252,112 +368,17 @@ public class MainScreenController implements Initializable {
             addSalao();
         }
     }
-    //End: Home
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Start: Agenda
-    //End: Agenda
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Start: Funcionarios
-    //End: Funcionario
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Start: Clientes
-    @FXML private Pane paneCliente;
-    @FXML private TextField txfNomeCliente, txfEmailCliente, txfCpfCliente, txfFoneCliente, txfEnderecoCliente, txfNumeroCliente,txfCepCliente;
-    @FXML private RadioButton radBhomem, radBmulher;
-    @FXML private Button btnPesquisarCliente, btnAdicionarCliente, btnCancelarCliente, btnConfirmarCliente;
-    @FXML private ToggleGroup groupGeneroCliente;
-
-    public void habilitarCamposCliente(){
-        paneCliente.setVisible(true);
-
-        btnPesquisarCliente.setVisible(false);
-        btnAdicionarCliente.setVisible(false);
-    }
-
-    public void desabilitarCamposCliente(){
-        paneCliente.setVisible(false);
-
-        btnPesquisarCliente.setVisible(true);
-        btnAdicionarCliente.setVisible(true);
-    }
-
-    public void LimparCamposCliente(){
-        txfNomeSalao.clear();
-        txfCnpjSalao.clear();
-    }
-
-    @FXML
-    void btnPesquisarCliente_click(ActionEvent event) {
-        habilitarCamposCliente();
-    }
-
-    @FXML
-    void btnAdicionarCliente_click(ActionEvent event) {
-        habilitarCamposCliente();
-    }
-
-    @FXML
-    void btnConfirmarCliente_click(ActionEvent event) {
-        desabilitarCamposCliente();
-    }
-
-    @FXML
-    void btnCancelarCliente_click(ActionEvent event) {
-        desabilitarCamposCliente();
-    }
-
-    //End: Clientes
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Start: Configuração
-
-    @FXML private AnchorPane paneEditUsuario,paneSaveUsuario;
-
-    @FXML private Button btnEditUsuario, btnSalvarUsuario;
-
-    @FXML private TextField txfEmailConfig, txfSenhaConfig, txfUsuarioConfig;
-
-    @FXML private Label lblUsuarioConfig, lblEmailConfig, lblSenhaConfig;
-
-    @FXML
-    void btnEditUsuario_click(ActionEvent event) {
-        lblUsuarioConfig.setVisible(false);
-        lblEmailConfig.setVisible(false);
-        lblSenhaConfig.setVisible(false);
-
-        txfUsuarioConfig.setText(Nome);
-        txfEmailConfig.setText(Email);
-        txfSenhaConfig.setText(Senha);
-
-        paneSaveUsuario.setVisible(true);
-        paneEditUsuario.setVisible(false);
-    }
-
-    @FXML
-    void btnSalvarUsuario_click(ActionEvent event) {
-        lblUsuarioConfig.setVisible(true);
-        lblEmailConfig.setVisible(true);
-        lblSenhaConfig.setVisible(true);
-
-        Nome = txfUsuarioConfig.getText();
-        Email = txfEmailConfig.getText();
-        Senha = txfSenhaConfig.getText();
-
-        atualizaUsuario();
-
-        paneSaveUsuario.setVisible(false);
-        paneEditUsuario.setVisible(true);
-    }
     //End: Configuração
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    @FXML
+    void btnTesteBanco_click(ActionEvent event) {
+        MongodbConnection connection = new MongodbConnection();
+
+        connection. inserir("Teste do Iserir");
+        connection.mostrar();
+    }
 
 
     public void logs(String v){

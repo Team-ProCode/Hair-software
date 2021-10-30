@@ -1,7 +1,6 @@
 package com.hairsoft.entity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Usuario {
 
@@ -60,6 +59,26 @@ public class Usuario {
 			}
 			return false;
 		}
+	}
+
+	public static boolean login(ArrayList<Usuario> usuarios, String userOrEmail, String senha){
+		for(Usuario usuario: usuarios) {
+			if ((usuario.email.equals(userOrEmail) && usuario.senha.equals(senha)) || (usuario.usuario.equals(userOrEmail) && usuario.senha.equals(senha))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static Usuario returnUser(ArrayList<Usuario> usuarios, String userOrEmail){
+		Usuario userLogado = new Usuario();
+		for(Usuario usuario: usuarios) {
+			if (usuario.email.equals(userOrEmail) | usuario.usuario.equals(userOrEmail)) {
+				userLogado = usuario;
+				return userLogado;
+			}
+		}
+		return userLogado;
 	}
 
 	public Integer getID() {
