@@ -1,14 +1,10 @@
 package com.hairsoft.controller;
 
-import com.hairsoft.Connections.MongodbConnection;
 import com.hairsoft.dialog.ErroDialog;
 import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
-import com.hairsoft.entity.UsuarioSalao;
 import com.hairsoft.hairsoft.MainScreenApp;
-import com.hairsoft.method.MainScreenMethod;
 
-import com.gluonhq.charm.glisten.control.Avatar;
 import com.hairsoft.method.ValidaCNPJ;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,14 +15,12 @@ import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
 
     public static Usuario usuario = new Usuario();
     public ArrayList<Salao> salaos = new ArrayList<>();
-    public ArrayList<UsuarioSalao> usuarioSalaos = new ArrayList<>();
 
     public int ID;
     public String Nome, Email, Senha;
@@ -37,33 +31,32 @@ public class MainScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        connectionListis();
-    }
-
-    public void connectionListis(){
         listInMemoryUser();
     }
 
     public void listInMemoryUser(){
+        try{
+            usuario = MainScreenApp.usuarios;
+            logs(usuario.name_user);
 
-        logs("Linha 49 erro");
-        usuario = MainScreenApp.usuarios;
+            logs("Linha 52 erro");
+            Nome = usuario.name_user;
+            Email = usuario.email_user;
+            ID = usuario.id_user;
 
-        logs("Linha 52 erro");
-        Nome = usuario.getUsuario();
-        Email = usuario.getEmail();
-        ID = usuario.getID();
-
-        atualizaUsuario();
+            atualizaUsuario();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     void atualizaUsuario(){
         lblUsuario.setText(Nome);
         lblWellcomeName.setText("Bem vindo(a) " + Nome);
 
-        lblUsuarioConfig.setText(Nome);
-        lblEmailConfig.setText(Email);
-        lblSenhaConfig.setText(Senha);
+        txfUsuarioConfig.setText(Nome);
+        txfEmailConfig.setText(Email);
+        txfSenhaConfig.setText(Senha);
     }
 
     @FXML private Tab tabHome, tabAgenda, tabFuncionarios,tabClientes, tabConfiguracao;
@@ -200,8 +193,8 @@ public class MainScreenController implements Initializable {
 
         if(!salaos.isEmpty()){
             for (Salao salao: salaos){
-                cmbSalaoHome.getItems().add(salao.ID + ": " + salao.Nome);
-                cmbSalaoBar.getItems().add(salao.ID + ": " + salao.Nome);
+                cmbSalaoHome.getItems().add(salao.id_salao + ": " + salao.nome_salao);
+                cmbSalaoBar.getItems().add(salao.id_salao + ": " + salao.nome_salao);
             }
             tabAgenda.setDisable(false);
             tabFuncionarios.setDisable(false);
@@ -229,8 +222,7 @@ public class MainScreenController implements Initializable {
                 txfCnpjSalao.clear();
             }
             else {
-                salaos.add(new Salao(Id, nomeSalao ,CNPJ));
-                usuarioSalaos.add(new UsuarioSalao(ID, Id));
+                salaos.add(new Salao(Id, nomeSalao ,CNPJ, ID));
 
                 addCombSalao();
                 LimparCamposSalao();
@@ -250,8 +242,8 @@ public class MainScreenController implements Initializable {
                 ErroDialog.alertDialog(dialog.getTitleErroIsEmpty(),dialog.getMessageErroIsEmpty());
             }else {
                 for (Salao salao: salaos){
-                    if(salao.ID == Id){
-                        salao.setNome(txfNomeSalao.getText());
+                    if(salao.id_salao == Id){
+                        salao.setNome_salao(txfNomeSalao.getText());
                     }
                 }
 
@@ -304,7 +296,7 @@ public class MainScreenController implements Initializable {
         Email = txfEmailConfig.getText();
         Senha = txfSenhaConfig.getText();
 
-        atualizaUsuario();
+//        atualizaUsuario();
 
         paneSaveUsuario.setVisible(false);
         paneEditUsuario.setVisible(true);
@@ -313,7 +305,6 @@ public class MainScreenController implements Initializable {
     @FXML void btnAdicionarSalao_click(ActionEvent event) {
         logs("btnAdicionar ativado, line: 162");
         Operacao = "adicionar";
-        txfIdSalao.setText(Integer.toString(Salao.gerarId(salaos)));
 
         btnDeletarSalao.setDisable(false);
 
@@ -334,13 +325,11 @@ public class MainScreenController implements Initializable {
                 txfIdSalao.setDisable(true);
                 txfCnpjSalao.setDisable(true);
 
-                txfIdSalao.setText(Integer.toString(Salao.gerarId(salaos)));
-
                 Salao salao = Salao.buscaSalao(salaos, cmbSalaoHome.getValue().toString());
 
-                txfIdSalao.setText(salao.ID.toString());
-                txfNomeSalao.setText(salao.getNome());
-                txfCnpjSalao.setText(salao.Cnpj);
+                txfIdSalao.setText(salao.id_salao.toString());
+                txfNomeSalao.setText(salao.getNome_salao());
+                txfCnpjSalao.setText(salao.cnpj_salao);
                 txfCnpjSalao.setDisable(true);
             }
             else{
@@ -370,15 +359,7 @@ public class MainScreenController implements Initializable {
     }
 
     //End: Configuração
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    @FXML
-    void btnTesteBanco_click(ActionEvent event) {
-        MongodbConnection connection = new MongodbConnection();
-
-        connection. inserir("Teste do Iserir");
-        connection.mostrar();
-    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     public void logs(String v){

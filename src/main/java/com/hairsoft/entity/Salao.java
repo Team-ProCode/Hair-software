@@ -1,68 +1,55 @@
 package com.hairsoft.entity;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
-public class Salao {
+public class Salao extends Usuario{
 
-    public Integer ID;
-    public String Nome;
-    public String Cnpj;
-    public List<Colaboradores> colaboradores;
-    public List<Clientes> clientes;
+    public Integer id_salao;
+    public String nome_salao;
+    public String cnpj_salao;
+    public Integer id_user;
 
     public Salao(){
 
     }
 
-    public Salao(int Id, String Nome, String Cnpj){
-        this.ID = Id;
-        this.Nome = Nome;
-        this.Cnpj = Cnpj;
+    public Salao(int Id, String Nome, String Cnpj, int Id_User){
+        this.id_salao = Id;
+        this.nome_salao = Nome;
+        this.cnpj_salao = Cnpj;
+        this.id_user = Id_User;
     }
 
-
-    public String getNome() {
-        return Nome;
+    public Integer getId_salao() {
+        return id_salao;
     }
 
-    public void setNome(String nome) {
-        Nome = nome;
+    public void setId_salao(Integer id_salao) {
+        this.id_salao = id_salao;
     }
 
-    public String getCnpj() {
-        return Cnpj;
+    public String getNome_salao() {
+        return nome_salao;
     }
 
-    public void setCnpj(String cnpj) {
-        Cnpj = cnpj;
+    public void setNome_salao(String nome_salao) {
+        this.nome_salao = nome_salao;
     }
 
-    public Integer getID() {
-        return ID;
+    public String getCnpj_Salao() {
+        return cnpj_salao;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setCnpj_Salao(String cnpj_Salao) {
+        this.cnpj_salao = cnpj_Salao;
     }
 
+    public Integer getId_user(){
+        return  id_user;
+    }
 
-
-
-
-    public static int gerarId(ArrayList<Salao> salaos){
-        int Id = 0;
-        if (salaos.isEmpty()) {
-            return Id;
-        } else {
-            for(Salao salao: salaos) {
-                if (salao.ID == Id) {
-                    ++Id;
-                }
-            }
-            return Id;
-        }
+    public void setId_user(int id_user){
+        this.id_user = id_user;
     }
 
     public static boolean cnpjExist(ArrayList<Salao> salaos, String CNPJ){
@@ -70,7 +57,7 @@ public class Salao {
             return false;
         } else {
             for(Salao salao: salaos) {
-                if (salao.Cnpj.equals(CNPJ)) {
+                if (salao.cnpj_salao.equals(CNPJ)) {
                     return true;
                 }
             }
@@ -83,7 +70,7 @@ public class Salao {
             return false;
         } else {
             for(Salao salao: salaos) {
-                if ((salao.ID + ": " + salao.Nome).equals(pesquisa)) {
+                if ((salao.id_salao + ": " + salao.nome_salao).equals(pesquisa)) {
                     return true;
                 }
             }
@@ -94,20 +81,20 @@ public class Salao {
     public static Salao buscaSalao(ArrayList<Salao> salaos, String pesquisa){
         Salao salaoPesquisa;
         for(Salao salao: salaos) {
-            if ((salao.ID + ": " + salao.Nome).equals(pesquisa)) {
-                salaoPesquisa = new Salao(salao.ID, salao.Nome, salao.Cnpj);
+            if ((salao.id_salao + ": " + salao.nome_salao).equals(pesquisa)) {
+                salaoPesquisa = new Salao(salao.id_salao, salao.nome_salao, salao.cnpj_salao, salao.id_user);
                 return  salaoPesquisa;
             }
         }
-        salaoPesquisa = new Salao(0, "Null", "Null");
+        salaoPesquisa = new Salao();
         return  salaoPesquisa;
     }
 
     @Override
     public String toString() {
         return "Salao{" +
-                "Id=" + ID +
-                ", Nome='" + Nome + '\'' +
+                "Id=" + id_salao +
+                ", Nome='" + nome_salao + '\'' +
                 '}';
     }
 }

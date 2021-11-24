@@ -16,17 +16,12 @@ public class MainScreenApp extends Application {
     private static Stage stage;
 
     public static Usuario usuarios = new Usuario();
-    //public static ArrayList<Salao> salaos = new ArrayList<>();
-    //public static ArrayList<Colaboradores> colaboradores = new ArrayList<>();
-    //public static ArrayList<Clientes> clientes = new ArrayList<>();
 
     public static void usuariosCall(Usuario usuarioLogado){
         MainScreenApp.usuarios = usuarioLogado;
     }
 
-    public static Usuario usuariosBack(){
-        return usuarios;
-    }
+    public static Usuario usuariosBack(){return usuarios;}
 
     @Override
     public void start(Stage stage) throws IOException {

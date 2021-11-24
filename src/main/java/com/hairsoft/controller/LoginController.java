@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.hairsoft.dao.UsuarioDAO;
 import com.hairsoft.dialog.ErroDialog;
 import com.hairsoft.method.Validation;
 import com.hairsoft.entity.Usuario;
@@ -27,10 +28,7 @@ public class LoginController implements Initializable {
 
     ErroDialog dialog = new ErroDialog();
 
-    public void initialize(URL url, ResourceBundle rb){
-        usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
-
-    }
+    public void initialize(URL url, ResourceBundle rb){    }
 
 	//public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
@@ -57,7 +55,6 @@ public class LoginController implements Initializable {
     }
 
     public void inserir(){
-        Alert alert;
         try{
             String nome, email, senha;
             nome = txfRegUsuario.getText();
@@ -66,17 +63,15 @@ public class LoginController implements Initializable {
 
             if(nome.isEmpty()){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
-            }else if (Usuario.equalUser(usuarios, nome)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterUserExists());
-            }
-            else if(Usuario.equalEmail(usuarios , email)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterEmailExists());
             }else if(!Validation.isValidEmail(email)){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterValidEmail());
+            }else if(UsuarioDAO.existEmail(email)){
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterEmailExists());
             }else if(!Validation.isValidSenha(senha)){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidPassword());
             }else{
-                usuarios.add(new Usuario(Usuario.gerarId(usuarios),nome, email, senha ));
+                Usuario usuario = new Usuario(nome, email, senha);
+                new UsuarioDAO().inserir(usuario);
                 register_off();
             }
         }catch(Exception e){
@@ -85,14 +80,13 @@ public class LoginController implements Initializable {
     }
 
     public void logar(){
-        Alert alert;
         try {
-            String userOrEmail, senha;
-            userOrEmail = txfEmail.getText();
+            String email, senha;
+            email = txfEmail.getText();
             senha = txfSenha.getText();
 
-            if(Usuario.login(usuarios, userOrEmail, senha)){
-                callScreen(userOrEmail);
+            if(UsuarioDAO.authentication(email, senha)){
+                callScreen(UsuarioDAO.findEmail(email));
                 LoginApp.getStage().close();
                 return;
             }else{
@@ -104,14 +98,13 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void callScreen(String userOrEmail){
-        MainScreenApp screenApp = new MainScreenApp();
-        System.out.println("Instancia Main Screen line:117");
+    public void callScreen(Usuario usuario){
         try{
-            MainScreenApp.usuariosCall(Usuario.returnUser(usuarios, userOrEmail));
+            MainScreenApp screenApp = new MainScreenApp();
+            System.out.println("Instancia Main Screen line:117");
+            MainScreenApp.usuariosCall(usuario);
             System.out.println("Usuario call back line:121");
-            Stage stage = new Stage();
-            screenApp.start(stage);
+            screenApp.start(new Stage());
             System.out.println("Iniciando instancia line:123");
         }catch (Exception e){
             ErroDialog.alertDialog(dialog.getTitleErroCallScreen(), dialog.getMessageErroCallScreen());

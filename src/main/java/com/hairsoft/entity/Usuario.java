@@ -1,24 +1,33 @@
 package com.hairsoft.entity;
 
+import com.hairsoft.dao.UsuarioDAO;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Usuario {
 
-	public Integer ID;
-	public String usuario;
-	public String email;
-	public String senha;
+	public Integer id_user;
+	public String name_user;
+	public String email_user;
+	public String senha_user;
 
 	public Usuario ()
 	{
 		
 	}
+
+	public Usuario(String usuario, String email, String senha) {
+		this.name_user = usuario;
+		this.email_user = email;
+		this.senha_user = senha;
+	}
 	
 	public Usuario(int id, String usuario, String email, String senha) {
-		this.ID = id;
-		this.usuario = usuario;
-		this.email = email;
-		this.senha = senha;
+		this.id_user = id;
+		this.name_user = usuario;
+		this.email_user = email;
+		this.senha_user = senha;
 	}
 
 	public static int gerarId(ArrayList<Usuario> usuarios){
@@ -27,7 +36,7 @@ public class Usuario {
 			return Id;
 		} else {
 			for(Usuario usuario: usuarios) {
-				if (usuario.ID == Id) {
+				if (usuario.id_user == Id) {
 					++Id;
 				}
 			}
@@ -35,45 +44,10 @@ public class Usuario {
 		}
 	}
 
-	public static boolean equalUser(ArrayList<Usuario> usuarios, String user){
-		if (usuarios.isEmpty()){
-			return false;
-		}else{
-			for (Usuario usuario: usuarios){
-				if (usuario.usuario.equals(user)){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean equalEmail(ArrayList<Usuario> usuarios, String email){
-		if (usuarios.isEmpty()) {
-			return false;
-		} else {
-			for(Usuario usuario: usuarios) {
-				if (usuario.email.equals(email)) {
-					return true;
-				}
-			}
-			return false;
-		}
-	}
-
-	public static boolean login(ArrayList<Usuario> usuarios, String userOrEmail, String senha){
-		for(Usuario usuario: usuarios) {
-			if ((usuario.email.equals(userOrEmail) && usuario.senha.equals(senha)) || (usuario.usuario.equals(userOrEmail) && usuario.senha.equals(senha))) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public static Usuario returnUser(ArrayList<Usuario> usuarios, String userOrEmail){
 		Usuario userLogado = new Usuario();
 		for(Usuario usuario: usuarios) {
-			if (usuario.email.equals(userOrEmail) | usuario.usuario.equals(userOrEmail)) {
+			if (usuario.email_user.equals(userOrEmail) | usuario.name_user.equals(userOrEmail)) {
 				userLogado = usuario;
 				return userLogado;
 			}
@@ -81,36 +55,36 @@ public class Usuario {
 		return userLogado;
 	}
 
-	public Integer getID() {
-		return ID;
+	public Integer getId_user() {
+		return id_user;
 	}
 
-	public void setID(Integer ID) {
-		this.ID = ID;
+	public void setId_user(Integer id_user) {
+		this.id_user = id_user;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setName_user(String name_user) {
+		this.name_user = name_user;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getName_user() {
+		return name_user;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail_user(String email_user) {
+		this.email_user = email_user;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmail_user() {
+		return email_user;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenha_user(String senha_user) {
+		this.senha_user = senha_user;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getSenha_user() {
+		return senha_user;
 	}
 
 }

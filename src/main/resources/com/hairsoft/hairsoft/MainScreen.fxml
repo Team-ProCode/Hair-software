@@ -67,7 +67,6 @@
                   <Image url="@image/Avatar-Mask.png" />
                </ImageView>
             </Pane>
-            <Button fx:id="btnTesteBanco" layoutX="54.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnTesteBanco_click" prefHeight="69.0" prefWidth="270.0" text="Teste Banco" />
          </AnchorPane>
       </Tab>
       <Tab fx:id="tabAgenda" disable="true" text="Agenda">
@@ -225,7 +224,41 @@
       </Tab>
       <Tab fx:id="tabConfiguracao" closable="false" text="Configuração">
          <AnchorPane prefHeight="200.0" prefWidth="200.0">
-            <ImageView fitHeight="97.0" fitWidth="100.0" layoutX="284.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+            <AnchorPane layoutX="29.0" layoutY="86.0" prefHeight="201.0" prefWidth="204.0">
+               <children>
+                  <PasswordField fx:id="txfSenhaConfig" layoutX="11.0" layoutY="160.0" prefHeight="30.0" prefWidth="181.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+                  <TextField fx:id="txfEmailConfig" layoutX="11.0" layoutY="103.0" prefHeight="30.0" prefWidth="183.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txfUsuarioConfig" layoutX="11.0" layoutY="33.0" prefHeight="39.0" prefWidth="183.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="79.0" layoutY="141.0" text="Senha">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="82.0" text="Email">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="76.0" layoutY="14.0" text="Usuario">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="97.0" fitWidth="100.0" layoutX="266.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@image/Avatar-Mask.png" />
             </ImageView>
             <Label layoutX="29.0" layoutY="35.0" text="Configurações gerais de Conta">
@@ -233,24 +266,6 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <Label layoutX="29.0" layoutY="98.0" text="Usuario" />
-            <Label layoutX="29.0" layoutY="164.0" text="Email" />
-            <TextField fx:id="txfUsuarioConfig" layoutX="21.0" layoutY="115.0" prefHeight="39.0" prefWidth="183.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txfEmailConfig" layoutX="22.0" layoutY="178.0" prefHeight="30.0" prefWidth="183.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="29.0" layoutY="222.0" text="Senha" />
-            <PasswordField fx:id="txfSenhaConfig" layoutX="23.0" layoutY="239.0" prefHeight="30.0" prefWidth="181.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </PasswordField>
             <AnchorPane fx:id="paneEditUsuario" layoutX="272.0" layoutY="209.0" prefHeight="26.0" prefWidth="85.0">
                <Button fx:id="btnEditUsuario" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnEditUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Editar" textFill="#4582bf" />
                <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
@@ -258,8 +273,8 @@
                </ImageView>
             </AnchorPane>
             <AnchorPane layoutX="255.0" layoutY="233.0" prefHeight="26.0" prefWidth="85.0">
-               <Button fx:id="btnSalvarUsuario" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnSalvarUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Salvar" textFill="#4582bf" />
-               <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <Button fx:id="btnSalvarUsuario" layoutX="43.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnSalvarUsuario_click" prefHeight="26.0" prefWidth="59.0" text="Salvar" textFill="#4582bf" />
+               <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="19.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@image/Save-Button.png" />
                </ImageView>
             </AnchorPane>
@@ -267,7 +282,7 @@
                <Pane fx:id="paneSalao" layoutX="-10.0" layoutY="-2.0" prefHeight="114.0" prefWidth="400.0" visible="false">
                   <Rectangle arcHeight="5.0" arcWidth="5.0" height="109.0" layoutX="12.0" layoutY="3.0" strokeType="INSIDE" width="380.0">
                      <stroke>
-                        <LinearGradient endX="0.3476190476190476" endY="1.0" startX="0.3142857142857143" startY="0.7857142857142857">
+                        <LinearGradient endX="0.3476190476190476" startX="0.3142857142857143" startY="0.7857142857142857">
                            <stops>
                               <Stop>
                                  <color>
