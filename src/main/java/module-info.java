@@ -8,6 +8,7 @@ module com.hairsoft.hairsoft {
     requires javafx.graphics;
     requires charm.glisten;
     requires java.sql;
+    requires mysql.connector.java;
 
     opens com.hairsoft.hairsoft to javafx.fxml;
     exports com.hairsoft.hairsoft;

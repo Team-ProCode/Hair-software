@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.hairsoft.dao.UsuarioDAO;
 import com.hairsoft.dialog.ErroDialog;
 import com.hairsoft.method.Validation;
 import com.hairsoft.entity.Usuario;
@@ -18,8 +19,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,10 +28,7 @@ public class LoginController implements Initializable {
 
     ErroDialog dialog = new ErroDialog();
 
-    public void initialize(URL url, ResourceBundle rb){
-        usuarios.add(new Usuario(1, "Thy", "Thy@gmail.com", "Thy123"));
-
-    }
+    public void initialize(URL url, ResourceBundle rb){    }
 
 	//public static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
@@ -59,7 +55,6 @@ public class LoginController implements Initializable {
     }
 
     public void inserir(){
-        Alert alert;
         try{
             String nome, email, senha;
             nome = txfRegUsuario.getText();
@@ -68,17 +63,15 @@ public class LoginController implements Initializable {
 
             if(nome.isEmpty()){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getTitleRegisterWrong());
-            }else if (Usuario.equalUser(usuarios, nome)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterUserExists());
-            }
-            else if(Usuario.equalEmail(usuarios , email)){
-                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterEmailExists());
             }else if(!Validation.isValidEmail(email)){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterValidEmail());
+            }else if(UsuarioDAO.existEmail(email)){
+                ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageRegisterEmailExists());
             }else if(!Validation.isValidSenha(senha)){
                 ErroDialog.alertDialog(dialog.getTitleRegisterWrong(), dialog.getMessageValidPassword());
             }else{
-                usuarios.add(new Usuario(Usuario.gerarId(usuarios),nome, email, senha ));
+                Usuario usuario = new Usuario(nome, email, senha);
+                new UsuarioDAO().inserir(usuario);
                 register_off();
             }
         }catch(Exception e){
@@ -87,24 +80,17 @@ public class LoginController implements Initializable {
     }
 
     public void logar(){
-        Alert alert;
         try {
-            String userOrEmail, senha;
-            userOrEmail = txfEmail.getText();
+            String email, senha;
+            email = txfEmail.getText();
             senha = txfSenha.getText();
 
-            for(Usuario usuario: usuarios) {
-              
-                if (usuario.usuario.equals(userOrEmail) | usuario.email.equals(userOrEmail) && usuario.senha.equals(senha)) {
-                    System.out.println("Encontrou usuario line:99");
-                    callScreen(usuario.email, usuario.usuario);
-                    System.out.println("Chamou metodo line:101");
-                    LoginApp.getStage().close();
-                    System.out.println("Fechou tela de login line:103");
-                    return;
-                }
-
-
+            if(UsuarioDAO.authentication(email, senha)){
+                callScreen(UsuarioDAO.findEmail(email));
+                LoginApp.getStage().close();
+                return;
+            }else{
+                ErroDialog.alertDialog(dialog.getTitleErroLogin(), dialog.getMessegeErroLogin());
             }
             throw new IOException();
         } catch (IOException var4) {
@@ -112,12 +98,11 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void callScreen(String Email, String Nome){
-        MainScreenApp screenApp = new MainScreenApp();
-        System.out.println("Intancia Main Screen line:117");
+    public void callScreen(Usuario usuario){
         try{
-
-            MainScreenApp.usuariosCallBack(usuarios, Nome, Email);
+            MainScreenApp screenApp = new MainScreenApp();
+            System.out.println("Instancia Main Screen line:117");
+            MainScreenApp.usuariosCall(usuario);
             System.out.println("Usuario call back line:121");
             screenApp.start(new Stage());
             System.out.println("Iniciando instancia line:123");
