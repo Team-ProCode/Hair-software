@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SalaoDAO {
+
     public void inserir(Salao salao){
         try{
             Connection connection = dbConnectionMySql.getInstance().getConnection();
@@ -20,9 +21,9 @@ public class SalaoDAO {
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setString(1 , salao.getName_user());
-            statement.setString(2 , salao.getEmail_user());
-            statement.setInt(3 , salao.getId_user());
+            statement.setString(1 , salao.nome_salao);
+            statement.setString(2 , salao.cnpj_salao);
+            statement.setInt(3 , salao.id_user);
 
             statement.execute();
             connection.close();
@@ -32,16 +33,16 @@ public class SalaoDAO {
         }
     }
 
-    public void delete(Usuario usuario){
+    public void delete(Salao salao){
 
         try{
             Connection connection = dbConnectionMySql.getInstance().getConnection();
 
-            String sql = "delete from usuario where codigo = ?";
+            String sql = "delete from salao where codigo = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setInt(1 , usuario.id_user);
+            statement.setInt(1 , salao.id_salao);
 
             statement.execute();
             connection.close();
@@ -51,19 +52,16 @@ public class SalaoDAO {
         }
     }
 
-    public void update(Usuario usuario){
+    public void update(Salao salao){
 
         try{
             Connection connection = dbConnectionMySql.getInstance().getConnection();
 
-            String sql = "update usuario nome = ?, email = ?, senha = ? where idPessoa = ?";
+            String sql = "update salao set nome = ? where codigo = ? ";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-
-            statement.setString(1 , usuario.getName_user());
-            statement.setString(2 , usuario.getEmail_user());
-            statement.setString(3 , usuario.getSenha_user());
-            statement.setInt(4 , usuario.getId_user());
+            statement.setString(1, salao.getNome_salao());
+            statement.setInt(2, salao.getId_salao());
 
             statement.execute();
             connection.close();
@@ -73,98 +71,80 @@ public class SalaoDAO {
         }
     }
 
-    public Usuario finallByCod(int cod) throws Exception {
+    public Salao finallByCod(int cod) throws Exception {
 
         Connection connection = dbConnectionMySql.getInstance().getConnection();
 
-        String sql = "select * from usuario where codigo = ? ";
+        String sql = "select * from salao where codigo = ? ";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1 , cod);
 
         ResultSet resultSet = statement.executeQuery(sql);
 
-        Usuario usuario = null;
+        Salao salao = null;
 
         if(resultSet.next()) {
-            usuario = new Usuario();
-            usuario.setId_user(resultSet.getInt("codigo"));
-            usuario.setName_user(resultSet.getString("nome"));
-            usuario.setEmail_user(resultSet.getString("email"));
-            usuario.setSenha_user(resultSet.getString("senha"));
+            salao = new Salao();
+            salao.setId_salao(resultSet.getInt("codigo"));
+            salao.setNome_salao(resultSet.getString("nome"));
+            salao.setCnpj_Salao(resultSet.getString("email"));
+            salao.setId_user(resultSet.getInt("codigo_usuario"));
         }
         connection.close();
-        return usuario;
+        return salao;
     }
 
-    public static Usuario findEmail(String email) {
+    public static int countSalao(int id_user) {
         try {
-            ArrayList<Usuario> usuarios = new ArrayList<>(Objects.requireNonNull(UsuarioDAO.findAll()));
-            if (!usuarios.isEmpty()) {
-                for (Usuario usuario : usuarios) {
-                    if (usuario.email_user.equals(email)) {
-                        return usuario;
-                    }
+            int ult = 0;
+            ArrayList<Salao> salaos = new ArrayList<>(Objects.requireNonNull(SalaoDAO.findAll(id_user)));
+            if (!salaos.isEmpty()) {
+                for(Salao salao: salaos) {
+                    ult = salao.id_salao;
                 }
             }
-            return null;
+            return ++ult;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            return 1;
         }
     }
 
-    public static List<Usuario> findAll() {
+    public static List<Salao> findAll(int id_user) {
         try {
             Connection connection = dbConnectionMySql.getInstance().getConnection();
 
-            String sql = "SELECT * FROM usuario";
+            String sql = "SELECT * FROM salao WHERE codigo_usuario = " + id_user;
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery(sql);
 
-            List<Usuario> usuarios = new ArrayList<>();
+            List<Salao> salaos = new ArrayList<>();
 
             while(resultSet.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setId_user(resultSet.getInt("codigo"));
-                usuario.setName_user(resultSet.getString("nome"));
-                usuario.setEmail_user(resultSet.getString("email"));
-                usuario.setSenha_user(resultSet.getString("senha"));
-                usuarios.add(usuario);
+                Salao salao = new Salao();
+                salao.setId_salao(resultSet.getInt("codigo"));
+                salao.setNome_salao(resultSet.getString("nome"));
+                salao.setCnpj_Salao(resultSet.getString("cnpj"));
+                salao.setId_user(resultSet.getInt("codigo_usuario"));
+                salaos.add(salao);
             }
             connection.close();
-            return usuarios;
+            return salaos;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
     }
 
-    public static boolean existEmail(String email){
+    public static boolean existCnpj(String cnpj, int id_user){
         try {
-            ArrayList<Usuario> usuarios = new ArrayList<>(Objects.requireNonNull(UsuarioDAO.findAll()));
-            if (!usuarios.isEmpty()) {
-                for (Usuario usuario : usuarios) {
-                    if (usuario.email_user.equals(email)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-    public static boolean authentication(String email, String senha){
-        try {
-            ArrayList<Usuario> usuarios = new ArrayList<>(Objects.requireNonNull(UsuarioDAO.findAll()));
-            if (!usuarios.isEmpty()) {
-                for (Usuario usuario : usuarios) {
-                    if (usuario.email_user.equals(email) && usuario.senha_user.equals(senha)) {
+            ArrayList<Salao> salaos = new ArrayList<>(Objects.requireNonNull(SalaoDAO.findAll(id_user)));
+            if (!salaos.isEmpty()) {
+                for (Salao salao : salaos) {
+                    if (salao.cnpj_salao.equals(cnpj)) {
                         return true;
                     }
                 }

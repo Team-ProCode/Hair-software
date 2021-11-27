@@ -7,6 +7,8 @@ import java.util.Objects;
 
 public class Usuario {
 
+	Usuario usuario;
+
 	public Integer id_user;
 	public String name_user;
 	public String email_user;
