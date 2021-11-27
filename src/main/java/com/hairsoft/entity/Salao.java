@@ -2,7 +2,7 @@ package com.hairsoft.entity;
 
 import java.util.ArrayList;
 
-public class Salao extends Usuario{
+public class Salao{
 
     public Integer id_salao;
     public String nome_salao;
@@ -15,6 +15,12 @@ public class Salao extends Usuario{
 
     public Salao(int Id, String Nome, String Cnpj, int Id_User){
         this.id_salao = Id;
+        this.nome_salao = Nome;
+        this.cnpj_salao = Cnpj;
+        this.id_user = Id_User;
+    }
+
+    public Salao( String Nome, String Cnpj, int Id_User){
         this.nome_salao = Nome;
         this.cnpj_salao = Cnpj;
         this.id_user = Id_User;

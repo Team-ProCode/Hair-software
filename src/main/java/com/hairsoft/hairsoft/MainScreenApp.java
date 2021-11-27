@@ -1,8 +1,5 @@
 package com.hairsoft.hairsoft;
 
-//import com.hairsoft.entity.Clientes;
-//import com.hairsoft.entity.Colaboradores;
-//import com.hairsoft.entity.Salao;
 import com.hairsoft.entity.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +17,6 @@ public class MainScreenApp extends Application {
     public static void usuariosCall(Usuario usuarioLogado){
         MainScreenApp.usuarios = usuarioLogado;
     }
-
-    public static Usuario usuariosBack(){return usuarios;}
 
     @Override
     public void start(Stage stage) throws IOException {

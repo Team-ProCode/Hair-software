@@ -56,7 +56,7 @@ public class UsuarioDAO {
         try{
             Connection connection = dbConnectionMySql.getInstance().getConnection();
 
-            String sql = "update usuario nome = ?, email = ?, senha = ? where idPessoa = ?";
+            String sql = "update usuario set nome = ?, email = ?, senha = ? where idPessoa = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -73,14 +73,13 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario finallByCod(int cod) throws Exception {
+    public static Usuario finallByCod(int cod) throws Exception {
 
         Connection connection = dbConnectionMySql.getInstance().getConnection();
 
-        String sql = "select * from usuario where codigo = ? ";
+        String sql = "select * from usuario where codigo =" + cod;
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1 , cod);
 
         ResultSet resultSet = statement.executeQuery(sql);
 
